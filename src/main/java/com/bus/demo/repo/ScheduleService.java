@@ -3,6 +3,7 @@ package com.bus.demo.repo;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -120,9 +121,13 @@ SeatRepo seatRepo;
 	@Override
 	public List<String> getStartTime(long busId, String startDate) {
 		Date  currentDate = new Date();
+		System.out.println(currentDate);
 		LocalDateTime dateTime2 = Instant.ofEpochMilli(currentDate.getTime())
 			      .atZone(ZoneId.systemDefault())
 			      .toLocalDateTime();
+		LocalDate dateTimeGetDate = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault()).toLocalDate();
+		System.out.println(dateTimeGetDate);
 		System.out.println(dateTime2.format(DateTimeFormatter.ofPattern("HH.mm")));
 		double check = Double.parseDouble(dateTime2.format(DateTimeFormatter.ofPattern("HH.mm")));
 		List<String> list= repo.getStartTimeByBusIdAndStartDate(busId, startDate);

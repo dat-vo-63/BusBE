@@ -107,7 +107,7 @@ public class BusControler {
 	@PostMapping("/addBill")
 	public Bill addBill(@RequestBody Map<String, String> input)
 	{
-		return iBill.addBill(Integer.parseInt(input.get("phoneNumber")),Long.parseLong(input.get("ticketId")));
+		return iBill.addBill((input.get("phoneNumber")),Long.parseLong(input.get("ticketId")));
 	}
 	@PostMapping ("/add-user")
 	public User addUser(@RequestBody User user) {

@@ -21,7 +21,7 @@ public class BillService implements IBill {
 	public static Thread thread = new Thread();
 
 	@Override
-	public Bill addBill(int phone, long ticketId) {
+	public Bill addBill(String phone, long ticketId) {
 		Bill bill = new Bill();
 		boolean a = false;
 		User user = userRepo.findByPhoneNumber(phone);

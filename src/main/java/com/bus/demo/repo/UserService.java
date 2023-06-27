@@ -12,7 +12,7 @@ public class UserService  implements IUser{
 @Autowired
 UserRepo repo;
 	@Override
-	public User findByPhoneNumber(int phoneNumber) {
+	public User findByPhoneNumber(String phoneNumber) {
 		
 		return repo.findByPhoneNumber(phoneNumber);
 	}

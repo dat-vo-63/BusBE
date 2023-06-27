@@ -17,7 +17,7 @@ private String userName;
 private String email;
 private String password;
 @Column(name = "phone_number",unique = true,nullable = false)
-private int phoneNumber;
+private String phoneNumber;
 private  String address;
 private String isActive;
 private int userBalance;
@@ -58,10 +58,10 @@ public String getPassword() {
 public void setPassword(String password) {
 	this.password = password;
 }
-public int getPhoneNumber() {
+public String getPhoneNumber() {
 	return phoneNumber;
 }
-public void setPhoneNumber(int phoneNumber) {
+public void setPhoneNumber(String phoneNumber) {
 	this.phoneNumber = phoneNumber;
 }
 public String getAddress() {
