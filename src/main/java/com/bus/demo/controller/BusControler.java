@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,7 @@ import com.bus.demo.repo.TicketService;
 
 @RestController
 @RequestMapping()
+@CrossOrigin(value = "*")
 public class BusControler {
 	@Autowired
 	IBus busRepo;
@@ -110,7 +112,7 @@ public class BusControler {
 		return iBill.addBill((input.get("phoneNumber")),Long.parseLong(input.get("ticketId")));
 	}
 	@PostMapping ("/add-user")
-	public User addUser(@RequestBody User user) {
+	public String addUser(@RequestBody User user) {
 		return iUser.save(user);
 	}
 	@PostMapping("/count-down/{id}")
@@ -131,5 +133,9 @@ public class BusControler {
 	@PostMapping("/payment/{billId}")
 	public String payment(@PathVariable Long billId) {
 		return iBill.Pay(billId);
+	}
+	@PostMapping("/login")
+	public String login(@RequestBody User user) {
+		return iUser.login(user.getEmail(), user.getPassword());
 	}
 	}

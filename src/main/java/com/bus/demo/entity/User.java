@@ -12,8 +12,9 @@ public class User {
 @Id
 @GeneratedValue
 private long userId;
-@Column(name = "user_name",unique = true,nullable = false)
+@Column(name = "user_name")
 private String userName;
+@Column ( name = "email",unique = true,nullable = false )
 private String email;
 private String password;
 @Column(name = "phone_number",unique = true,nullable = false)

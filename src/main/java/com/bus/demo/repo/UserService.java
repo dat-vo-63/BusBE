@@ -18,16 +18,40 @@ UserRepo repo;
 	}
 
 	@Override
-	public User save(User user) {
-		User user2 = repo.findByPhoneNumberAndUserName(user.getPhoneNumber(), user.getUserName());
-		if(user2== null)
+	public String save(User user) {
+		String check = "";
+		User user2 = repo.findByPhoneNumber(user.getPhoneNumber());
+		User user3 = repo.findByEmail(user.getEmail());
+		if(user2== null&& user3 ==null)
 		{
 		user.setIsActive("active");
-		return repo.save(user);
+		repo.save(user);
+		return "Register Successful";
+		}
+		else if (user3!=null && user2==null)  {
+			return check+"Phone Have Exits";
+		}
+		else if (user3== null && user2 !=null) {
+			return check+"Email Have Exits";
+		
 		}
 		else {
-			return null;
+			return check+" Phone and Email Have Exits";
 		}
+		
+	}
+
+	@Override
+	public String login(String email, String password) {
+		User user = repo.findByEmailAndPassword(email, password);
+		if(user==null)
+		{
+			return "Username or Passworđ not correct"; 
+		}
+		else {
+			return user.getUserName();
+		}
+		 
 	}
 
 }
