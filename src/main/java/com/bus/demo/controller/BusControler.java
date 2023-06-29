@@ -135,7 +135,7 @@ public class BusControler {
 		return iBill.Pay(billId);
 	}
 	@PostMapping("/login")
-	public String login(@RequestBody User user) {
+	public User login(@RequestBody User user) {
 		return iUser.login(user.getEmail(), user.getPassword());
 	}
 	}

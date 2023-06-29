@@ -42,14 +42,14 @@ UserRepo repo;
 	}
 
 	@Override
-	public String login(String email, String password) {
+	public User login(String email, String password) {
 		User user = repo.findByEmailAndPassword(email, password);
 		if(user==null)
 		{
-			return "Username or Passworđ not correct"; 
+			return user; 
 		}
 		else {
-			return user.getUserName();
+			return user;
 		}
 		 
 	}
