@@ -54,4 +54,38 @@ UserRepo repo;
 		 
 	}
 
+	@Override
+	public String updateUser(User user) {
+		User user2 = repo.findByEmail(user.getEmail());
+		if(user.getAddress()!=null)
+		{
+			user2.setAddress(user.getAddress());
+		}
+		if(user.getPassword()!= null) {
+			user2.setPassword(user.getPassword());
+			
+		}
+		if(user.getPhoneNumber()!=null)
+		{
+			User user3 = repo.findByPhoneNumber(user.getPhoneNumber());
+			if (user3!=null) {
+				return "Phone Number Is Already Exited";
+			}
+			else {
+				user2.setPhoneNumber(user.getPhoneNumber());
+			}
+		}
+		if(user.getUserName()!=null) {
+			user2.setUserName(user.getUserName());
+		}
+		repo.save(user2);
+		return "Update Success";
+	}
+
+	@Override
+	public User findByEmail(String email) {
+		
+		return repo.findByEmail(email);
+	}
+
 }

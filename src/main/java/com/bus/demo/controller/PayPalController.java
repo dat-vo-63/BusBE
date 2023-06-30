@@ -102,7 +102,8 @@ public class PayPalController {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         //JSON String
-        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\""+bill2.getTotalPrice()+"\"}}]}";        HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
+        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\""+bill2.getTotalPrice()+"\"}}]}";       
+        HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
 
         ResponseEntity<Object> response = restTemplate.exchange(
                 BASE + "/v2/checkout/orders",

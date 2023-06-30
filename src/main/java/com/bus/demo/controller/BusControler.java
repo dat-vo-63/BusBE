@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -144,5 +145,14 @@ public class BusControler {
 	@PostMapping("/login")
 	public User login(@RequestBody User user) {
 		return iUser.login(user.getEmail(), user.getPassword());
+	}
+	@PostMapping("/update-user")
+	public String Update(@RequestBody User user)
+	{
+		return iUser.updateUser(user);
+	}
+	@PutMapping("/find-by-email/{email}")
+	public User findByEmail(@PathVariable ("email")  String email) {
+		return iUser.findByEmail(email);
 	}
 	}
