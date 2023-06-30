@@ -68,7 +68,7 @@ UserRepo repo;
 		if(user.getPhoneNumber()!=null)
 		{
 			User user3 = repo.findByPhoneNumber(user.getPhoneNumber());
-			if (user3!=null) {
+			if (user3!=null&& user3.getEmail()!=user2.getEmail()) {
 				return "Phone Number Is Already Exited";
 			}
 			else {
