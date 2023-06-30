@@ -52,6 +52,8 @@ public class BusControler {
 	IBill iBill;
 	@Autowired
 	IUser iUser;
+	@Autowired
+	PayPalController controller;
 //@GetMapping ("/all")
 //public ResponseEntity<List<Bus>>  getAll(){
 //	return new ResponseEntity<>(IBus.findAll(),HttpStatus.OK);
@@ -60,6 +62,10 @@ public class BusControler {
 	public Bus addBus(@RequestBody Bus bus)
 	{
 		return busRepo.saveBus(bus);
+	}
+	@GetMapping("/findAllBus")
+	public List<Bus> findAllBus(){
+		return busRepo.findAll();
 	}
 	@GetMapping("/findBus")
 	public Set<Bus> findBusToCurrentDate()
@@ -109,6 +115,7 @@ public class BusControler {
 	@PostMapping("/addBill")
 	public Bill addBill(@RequestBody Map<String, String> input)
 	{
+		
 		return iBill.addBill((input.get("phoneNumber")),Long.parseLong(input.get("ticketId")));
 	}
 	@PostMapping ("/add-user")

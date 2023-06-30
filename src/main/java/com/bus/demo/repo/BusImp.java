@@ -30,6 +30,12 @@ public class BusImp implements IBus {
 		return busRepo.findById(id);
 	}
 
+	@Override
+	public List<Bus> findAll() {
+	
+		return busRepo.findAll();
+	}
+
 //	@Override
 //	public boolean bookSeat(long id, List<Seat> list) {
 //		Bus bus = busRepo.getById(id);
