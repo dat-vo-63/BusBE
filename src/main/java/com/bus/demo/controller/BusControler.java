@@ -151,7 +151,7 @@ public class BusControler {
 	{
 		return iUser.updateUser(user);
 	}
-	@GetMapping("/find-by-email/{email}")
+	@GetMapping("/findByEmail/{email}")
 	public User findByEmail(@PathVariable ("email")  String email) {
 		return iUser.findByEmail(email);
 	}
