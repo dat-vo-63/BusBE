@@ -165,5 +165,22 @@ SeatRepo seatRepo;
 		}
 		return bus;
 	}
+	@Override
+	public List<String> getSeatBooked(long busId,String startDate,String startTime) {
+		List<Schedual> scheduals = findScheduleByBusIdAndStartDateAndStartTime(busId, startDate, startTime);
+		List<Seat> seats = scheduals.get(0).getSeats();
+		List<Seat> seats2 = new ArrayList<>();
+		List<String> list = new ArrayList<>();
+		for(int i =0;i<=seats.size()-1;i++) {
+			if(seats.get(i).getTicket()!=null)
+			{
+				seats2.add(seats.get(i));
+			}
+		}
+		for(int j=0;j<=seats2.size()-1;j++) {
+			list.add(seats.get(j).getSeatNo());
+		}
+		return list;
+	}
 
 }

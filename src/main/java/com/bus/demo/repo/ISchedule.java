@@ -16,4 +16,5 @@ public interface ISchedule {
  public List<String> getStartTime(long busId,String startDate);
  public List<Schedual> findScheduleByBusIdAndStartDateAndStartTime(long busId,String startDate,String startTime);
  public Set<Bus> findBusByStartDate();
+ public List<String> getSeatBooked(long busId,String startDate,String startTime);
 }

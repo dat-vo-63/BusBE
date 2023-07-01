@@ -60,7 +60,7 @@ public class BusControler {
 //	return new ResponseEntity<>(IBus.findAll(),HttpStatus.OK);
 //}
 	@PostMapping("/add")
-	public Bus addBus(@RequestBody Bus bus)
+	public String addBus(@RequestBody Bus bus)
 	{
 		return busRepo.saveBus(bus);
 	}
@@ -154,5 +154,10 @@ public class BusControler {
 	@GetMapping("/find-By-Email/{email}")
 	public User findByEmail(@PathVariable ("email")  String email) {
 		return iUser.findByEmail(email);
+	}
+	@GetMapping("/find-seat-booked")
+	public List<String> SeatBooked(@RequestBody Map<String, String> map)
+	{
+		return schedule.getSeatBooked(Long.parseLong(map.get("busId")), map.get("startDate"), map.get("startTime"));
 	}
 	}

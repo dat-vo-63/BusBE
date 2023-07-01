@@ -7,7 +7,7 @@ import com.bus.demo.entity.Seat;
 
 public interface IBus {
 public boolean bookSeat(long id,List<Seat> list);
-public Bus  saveBus(Bus bus);
+public String  saveBus(Bus bus);
 public Bus findById(long id);
 public List<Bus> findAll();
 }

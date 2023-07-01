@@ -19,9 +19,9 @@ public class BusImp implements IBus {
 	}
 
 	@Override
-	public Bus saveBus(Bus bus) {
+	public String saveBus(Bus bus) {
 		
-		return busRepo.save(bus);
+		return busRepo.save(bus) != null?"Add Susscess":"Error";
 	}
 
 	@Override

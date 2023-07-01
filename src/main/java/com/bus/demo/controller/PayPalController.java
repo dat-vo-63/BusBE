@@ -8,8 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import com.bus.demo.entity.Bill;
-import com.bus.demo.repo.BillRepo;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,9 +16,10 @@ import org.json.*;
 import java.util.*;
 
 @RestController
+@CrossOrigin (value = "*")
+
 public class PayPalController {
-	@Autowired
-	BillRepo billRepo;
+
     private final String  BASE = "https://api-m.sandbox.paypal.com";
     private final static Logger LOGGER =  Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -59,7 +59,7 @@ public class PayPalController {
     }
 
     @RequestMapping(value="/api/orders/{orderId}/capture", method = RequestMethod.POST)
-    @CrossOrigin
+  
     public Object capturePayment(@PathVariable("orderId") String orderId) {
         String accessToken = generateAccessToken();
         HttpHeaders headers = new HttpHeaders();
@@ -88,10 +88,9 @@ public class PayPalController {
         }
     }
 
-    @RequestMapping(value="/api/orders/{billId}", method = RequestMethod.POST)
-    @CrossOrigin
-    public Object createOrder(@PathVariable ("billId") long billId) {
-    	Bill bill2 = billRepo.findByBillId(billId);
+    @RequestMapping(value="/api/orders", method = RequestMethod.POST)
+
+    public Object createOrder() {
         String accessToken = generateAccessToken();
         RestTemplate restTemplate = new RestTemplate();
 
@@ -102,7 +101,7 @@ public class PayPalController {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         //JSON String
-        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\""+bill2.getTotalPrice()+"\"}}]}";       
+        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\"100.00\"}}]}";
         HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
 
         ResponseEntity<Object> response = restTemplate.exchange(
@@ -111,11 +110,12 @@ public class PayPalController {
                 entity,
                 Object.class
         );
+        
 
         if (response.getStatusCode() == HttpStatus.CREATED) {
             LOGGER.log(Level.INFO, "ORDER CAPTURE");
-            bill2.setBillStatus("Paid");
-            billRepo.save(bill2);
+           
+          
             
             return response.getBody();
         } else {
