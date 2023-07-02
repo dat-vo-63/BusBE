@@ -8,7 +8,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-
+import com.bus.demo.entity.Bill;
+import com.bus.demo.repo.BillRepo;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,9 @@ import java.util.*;
 @CrossOrigin (value = "*")
 
 public class PayPalController {
-
+	@Autowired
+	BillRepo billRepo;
+	private static Bill bill;
     private final String  BASE = "https://api-m.sandbox.paypal.com";
     private final static Logger LOGGER =  Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -81,6 +84,8 @@ public class PayPalController {
 
         if (response.getStatusCode() == HttpStatus.CREATED) {
             LOGGER.log(Level.INFO, "ORDER CREATED");
+            bill.setBillStatus("Paid");
+            billRepo.save(bill);
             return response.getBody();
         } else {
             LOGGER.log(Level.INFO, "FAILED CREATING ORDER");
@@ -88,9 +93,12 @@ public class PayPalController {
         }
     }
 
-    @RequestMapping(value="/api/orders", method = RequestMethod.POST)
+    @RequestMapping(value="/api/orders/{billId}", method = RequestMethod.POST)
 
-    public Object createOrder() {
+    public Object createOrder(@PathVariable("billId") long billId) {
+    	bill = billRepo.findByBillId(billId);
+    	if(bill!=null)
+    	{
         String accessToken = generateAccessToken();
         RestTemplate restTemplate = new RestTemplate();
 
@@ -101,7 +109,7 @@ public class PayPalController {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         //JSON String
-        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\"100.00\"}}]}";
+        String requestJson = "{\"intent\":\"CAPTURE\",\"purchase_units\":[{\"amount\":{\"currency_code\":\"USD\",\"value\":\""+bill.getTotalPrice()+"\"}}]}";
         HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
 
         ResponseEntity<Object> response = restTemplate.exchange(
@@ -122,6 +130,10 @@ public class PayPalController {
             LOGGER.log(Level.INFO, "FAILED CAPTURING ORDER");
             return "Unavailable to get CAPTURE ORDER, STATUS CODE " + response.getStatusCode();
         }
+    	}
+    	else {
+			return null;
+		}
 
     }
 }

@@ -182,5 +182,29 @@ SeatRepo seatRepo;
 		}
 		return list;
 	}
+	@Override
+	public List<Schedual> findbyBusId(long busId) {
+		
+		return repo.findByBus(busId);
+	}
+	@Override
+	public String checkUpdate(long scheduleId) {
+		Schedual schedual = repo.findById(scheduleId);
+		int check =0;
+		for(int i =0;i<schedual.getSeats().size();i++)
+		{
+			if(schedual.getSeats().get(i).getTicket()!=null) {
+				check++;
+				break;
+			}
+		}
+		if(check >0)
+		{
+			return "Sorry Schedule Has Ticket So You Can't Update";
+		}
+		else {
+			return "You can Update";
+		}
+	}
 
 }

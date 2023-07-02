@@ -64,6 +64,11 @@ public class BusControler {
 	{
 		return busRepo.saveBus(bus);
 	}
+	@PostMapping("update-bus/{busId}")
+	public String UpdateBus(@PathVariable("busId") long busId)
+	{
+		return busRepo.checkUpdateBus(busId);
+	}
 	@GetMapping("/findAllBus")
 	public List<Bus> findAllBus(){
 		return busRepo.findAll();
@@ -95,9 +100,13 @@ public class BusControler {
 	public List<Schedual> getScheduleByBusIdAndStartDateAndStartTime(@PathVariable long id,@RequestBody Schedual schedual) {
 			return schedule.findScheduleByBusIdAndStartDateAndStartTime(id, schedual.getStartDate(), schedual.getStartTime());
 	}
-	@PostMapping("/update/{id}")
+	@PostMapping("/update-schedule/{id}")
 	public Schedual updateSchedule(@RequestBody Schedual schedual,@PathVariable long id) {
 		return  schedule.updateSchedule(id, schedual);
+	}
+	@GetMapping("/check-update/{id}")
+	public String checkUpdate(@PathVariable("id") long id) {
+		return  schedule.checkUpdate(id);
 	}
 	@GetMapping("/get-start-time/{id}")
 	public List<String> getStartTime(@RequestBody Schedual schedual,@PathVariable long id) {

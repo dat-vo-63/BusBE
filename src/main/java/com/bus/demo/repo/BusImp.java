@@ -1,16 +1,25 @@
 package com.bus.demo.repo;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bus.demo.entity.Bus;
+import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
 @Service
 public class BusImp implements IBus {
 	@Autowired
 	BusRepo busRepo;
+	@Autowired
+	ISchedule iSchedule;
 
 	@Override
 	public boolean bookSeat(long id, List<Seat> list) {
@@ -34,6 +43,43 @@ public class BusImp implements IBus {
 	public List<Bus> findAll() {
 	
 		return busRepo.findAll();
+	}
+
+	@Override
+	public String checkUpdateBus(long busId) {
+		List<Schedual> scheduals = iSchedule.findbyBusId(busId);
+		
+		int check =0;
+		Date  currentDate = new Date();
+		System.out.println(currentDate);
+		LocalDateTime dateTime = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDateTime();
+		LocalDate Date = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault()).toLocalDate();
+		double currentTime = Double.parseDouble(dateTime.format(DateTimeFormatter.ofPattern("HH.mm")));
+		for(int i=0;i<=scheduals.size()-1;i++)
+		{
+			String getscheduleTime = scheduals.get(i).getStartTime();
+			getscheduleTime = getscheduleTime.replace(':', '.');
+			double scheduleTime = Double.parseDouble(getscheduleTime);
+			String dateSchedule = scheduals.get(i).getStartDate().replace('/', '-');
+			System.out.println(dateSchedule);
+			 LocalDate date = LocalDate.parse(dateSchedule);
+			    if(Date.isBefore(date) || Date.isEqual(date) && currentTime < scheduleTime )
+			    {
+			    	check++;
+			    	break;
+			    }
+			
+		}
+		if(check>0)
+		{
+			return "Can't Update Bus because Schedule Already Create";
+		}
+		else {
+			return "You can Update";
+		}
 	}
 
 //	@Override

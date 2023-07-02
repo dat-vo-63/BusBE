@@ -26,6 +26,8 @@ public interface ScheduleRepo extends JpaRepository<Schedual, Long> {
 	public List<Schedual> findByBusIdAndStartDateAndStartTime(@Param("busId") long busId,@Param("startDate") String startDate,@Param("startTime")String startTime);
 	@Query ("SELECT s FROM Schedual s WHERE s.startDate =:startDate ")
 	public List<Schedual> findByStartDate(String startDate);
+	@Query("SELECT DISTINCT s FROM Schedual s WHERE s.bus.busId=:busId")
+	public List<Schedual> findByBus(long busId);
 //	@Query("SELECT s FROM Schedual s WHERE s.seats()")
 //	public Schedual findBySeats
 }

@@ -44,7 +44,26 @@ public class Schedual implements Comparable<Schedual> {
 	private int seatLeft;
 	@Column(name = "startDate")
 	private String startDate;
+	public String getDeparture() {
+		return departure;
+	}
 
+	public void setDeparture(String departure) {
+		this.departure = departure;
+	}
+
+	public String getDestinations() {
+		return destinations;
+	}
+
+	public void setDestinations(String destinations) {
+		this.destinations = destinations;
+	}
+
+	@Column(name = "departure ")
+	private String departure;
+	@Column (name = "destinations")
+	private String destinations;
 	public String getStartDate() {
 		return startDate;
 	}

@@ -21,8 +21,7 @@ import jakarta.persistence.Table;
 public class Bus implements Comparable<Bus>{
 @Override
 	public String toString() {
-		return "Bus [busId=" + busId + ", name=" + name + ", seat=" + seat + ", fromLocate=" + fromLocate
-				+ ", toLocate=" + toLocate + "]";
+		return "Bus [busId=" + busId + ", name=" + name + ", seat=" + seat + ", fromLocate=" + "]";
 	}
 
 
@@ -34,27 +33,12 @@ private long busId;
 private String name;
 @Column(name = "bus_seat")
 private int seat;
-@Column (name = "from_locate")
-private String fromLocate;
-@Column (name = "to_locate")
-private String toLocate;
 @Override
 public int hashCode() {
-	return Objects.hash( fromLocate, name, seat, toLocate);
+	return Objects.hash(  name, seat);
 }
 
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Bus other = (Bus) obj;
-	return  Objects.equals(fromLocate, other.fromLocate)
-			&& Objects.equals(name, other.name) &&  Objects.equals(toLocate, other.toLocate);
-}
+
 
 
 
@@ -66,22 +50,6 @@ public String getImageBus() {
 
 public void setImageBus(String imageBus) {
 	this.imageBus = imageBus;
-}
-
-public String getFromLocate() {
-	return fromLocate;
-}
-
-public void setFromLocate(String fromLocate) {
-	this.fromLocate = fromLocate;
-}
-
-public String getToLocate() {
-	return toLocate;
-}
-
-public void setToLocate(String toLocate) {
-	this.toLocate = toLocate;
 }
 
 public long getBusId() {

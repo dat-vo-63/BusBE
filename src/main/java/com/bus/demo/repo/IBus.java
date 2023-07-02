@@ -10,4 +10,5 @@ public boolean bookSeat(long id,List<Seat> list);
 public String  saveBus(Bus bus);
 public Bus findById(long id);
 public List<Bus> findAll();
+public String checkUpdateBus(long busId);
 }
