@@ -1,5 +1,6 @@
 package com.bus.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bus.demo.entity.Bill;
 import com.bus.demo.entity.Bus;
+import com.bus.demo.entity.GetInfor;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
 import com.bus.demo.entity.Ticket;
@@ -196,5 +198,18 @@ public class BusControler {
 	public List<String> SeatBooked(@RequestBody Map<String, String> map)
 	{
 		return schedule.getSeatBooked(Long.parseLong(map.get("busId")), map.get("startDate"), map.get("startTime"));
+	}
+	@GetMapping("/find-Bill")
+	public List<GetInfor> findInfo() {
+		return iBill.getDetailBill();
+	}
+	@PostMapping("/addTicket")
+	public List<Integer> addTickk(@RequestBody Map<String, Integer> map)
+	{
+		List<Integer> num = new ArrayList<>();
+		for(int i =0;i<map.size();i++) {
+			num.add(map.get(""+i+""));
+		}
+		return num;
 	}
 	}

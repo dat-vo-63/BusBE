@@ -307,6 +307,7 @@ SeatRepo seatRepo;
 			arr[1]= "0" +arr[1];
 		}
 		date = arr[0]+"/"+arr[1]+"/"+arr[2];
+		System.out.println(date);
 		return repo.findByStartDate(date);
 	}
 

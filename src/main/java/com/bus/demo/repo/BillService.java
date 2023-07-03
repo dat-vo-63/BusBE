@@ -1,9 +1,13 @@
 package com.bus.demo.repo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bus.demo.entity.Bill;
+import com.bus.demo.entity.GetInfor;
 import com.bus.demo.entity.Seat;
 import com.bus.demo.entity.Ticket;
 import com.bus.demo.entity.User;
@@ -121,6 +125,30 @@ public class BillService implements IBill {
 	public String delete(long billId) {
 		billRepo.deleteById(billId);
 		return "Deleted";
+	}
+
+	@Override
+	public List<GetInfor> getDetailBill() {
+		List<Ticket> tickets = ticketRepo.findAll();
+		
+		List<GetInfor> getInfors = new ArrayList<>();
+		for(int i=0;i<=tickets.size()-1;i++)
+		{
+			List<String> seatNo = new ArrayList<>();
+			GetInfor getInfor = new GetInfor();
+			getInfor.setBillId(tickets.get(i).getBill().getBillId());
+			getInfor.setStartDate(tickets.get(i).getSeats().get(0).getSchedual().getStartDate());
+			getInfor.setPrice(tickets.get(i).getBill().getTotalPrice());
+			getInfor.setStartTime(tickets.get(i).getSeats().get(0).getSchedual().getStartTime());
+			for(int j=0;j<=tickets.get(i).getSeats().size()-1;j++) {
+				seatNo.add(tickets.get(i).getSeats().get(j).getSeatNo());
+			}
+			getInfor.setSeatNumber(seatNo);
+			getInfors.add(getInfor);
+			
+		}
+		return getInfors;
+		
 	}
 
 }
