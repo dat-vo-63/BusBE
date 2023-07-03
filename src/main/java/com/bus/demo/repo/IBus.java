@@ -11,4 +11,5 @@ public String  saveBus(Bus bus);
 public Bus findById(long id);
 public List<Bus> findAll();
 public String checkUpdateBus(long busId);
+public String update(Bus bus,long  busId);
 }

@@ -73,6 +73,10 @@ public class BusControler {
 	public List<Bus> findAllBus(){
 		return busRepo.findAll();
 	}
+	@PostMapping("/updateBus/{id}")
+	public String updateBus(@RequestBody Bus bus,@PathVariable("id") long id) {
+		return busRepo.update(bus, id);
+	}
 	@GetMapping("/findBus")
 	public Set<Bus> findBusToCurrentDate()
 	{

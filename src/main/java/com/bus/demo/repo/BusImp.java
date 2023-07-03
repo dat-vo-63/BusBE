@@ -82,6 +82,27 @@ public class BusImp implements IBus {
 		}
 	}
 
+	@Override
+	public String update(Bus bus,long busId) {
+		String check = checkUpdateBus(busId);
+		if(check.equalsIgnoreCase("You can Update"))
+		{
+		 Bus bu= busRepo.findById(busId);
+		 if(bu!=null) {
+			 bu.setName(bus.getName());
+			 bu.setSeat(bus.getSeat());
+			 busRepo.save(bu);
+			 return "Update Success";
+		 }
+		 else {
+			return "Some Ínfomation Is Not Correct";
+		}
+		}
+		else {
+			return "Can't Update";
+		}
+	}
+
 //	@Override
 //	public boolean bookSeat(long id, List<Seat> list) {
 //		Bus bus = busRepo.getById(id);
