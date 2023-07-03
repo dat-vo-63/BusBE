@@ -1,5 +1,5 @@
-package com.bus.demo.controller;
-
-public class EmailController {
-
-}
+//package com.bus.demo.controller;
+//
+//public class EmailController {
+//
+//}

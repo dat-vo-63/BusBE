@@ -53,8 +53,6 @@ public class BusControler {
 	IBill iBill;
 	@Autowired
 	IUser iUser;
-	@Autowired
-	PayPalController controller;
 //@GetMapping ("/all")
 //public ResponseEntity<List<Bus>>  getAll(){
 //	return new ResponseEntity<>(IBus.findAll(),HttpStatus.OK);
@@ -96,6 +94,11 @@ public class BusControler {
 	public List<Schedual> findAll(){
 		return schedule.findAll();
 	}
+	@GetMapping("/find-schedule-start-time-depart-des")
+	public List<Schedual> findScheduleByStartTimeAndDepAndDes(@RequestBody Map<String, String> map)
+	{
+		return schedule.findByStartDateAndDepartureAndDestinations(map.get("startDate"),map.get("departure"), map.get("destinations"));
+	}
 	@GetMapping("/get-schedule-start-time")
 	public Schedual getScheduleByStartTime(@RequestBody Schedual schedual) {
 		return  schedule.findScheduleByStartTime(schedual.getStartTime());
@@ -120,6 +123,23 @@ public class BusControler {
 	public List<String> getStartTime(@RequestBody Schedual schedual,@PathVariable long id) {
 		return  schedule.getStartTime(id,schedual.getStartDate());
 	}
+	@GetMapping("/get-schedule-start-date")
+	public List<Schedual> getAllByStartDate(@RequestBody Map<String, String> map)
+	{
+		return schedule.findByStartDate(map.get("startDate"));
+	}
+	@GetMapping("/get-departure")
+	public Set<String> getAllDepartureByStartDate(@RequestBody Map<String, String> map)
+	{
+		return schedule.getAllDeparture(map.get("startDate"));
+	}
+	@GetMapping("/get-destinations")
+	public Set<String> getAllDestinationsByStartDate(@RequestBody Map<String, String> map)
+	{
+		return schedule.getAllDestinations(map.get("startDate"));
+	}
+	
+	
 	@PostMapping ("/add-ticket")
 	public String  addTicket(@RequestBody Ticket ticket) {
 		return ticketService.saveTicket(ticket)?"Add Success":"Sorry seat already booked";

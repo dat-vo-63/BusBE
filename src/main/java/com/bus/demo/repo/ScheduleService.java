@@ -185,7 +185,8 @@ SeatRepo seatRepo;
 		List<String> newList=new ArrayList<>();
 		for(int i=0;i<=list.size()-1;i++) {
 			String a= list.get(i).replace(':', '.');
-			double compare = Double.parseDouble(a);
+			//compare laf  time date cua schedule
+			double compare = Double.parseDouble(a) ;
 			if(check<compare)
 			{
 				newList.add(list.get(i));
@@ -261,6 +262,40 @@ SeatRepo seatRepo;
 	public List<Schedual> findAll() {
 		// TODO Auto-generated method stub
 		return repo.findAll();
+	}
+	@Override
+	public List<Schedual> findByStartDateAndDepartureAndDestinations(String startDate, String Depart, String Des) {
+		// TODO Auto-generated method stub
+		return repo.findByStartDateAndDepartureAndDestinations(startDate, Depart, Des);
+	}
+	@Override
+	public Set<String> getAllDeparture(String date) {
+		List<Schedual> list = repo.findByStartDate(date);
+		Set<String> departure= new HashSet<>();
+		for(int i =0;i<=list.size()-1;i++)
+		{
+		departure.add(list.get(i).getDeparture());
+		}
+		
+		
+		return departure;
+	}
+	@Override
+	public Set<String> getAllDestinations(String date) {
+		List<Schedual> list = repo.findByStartDate(date);
+		Set<String> destinations= new HashSet<>();
+		for(int i =0;i<=list.size()-1;i++)
+		{
+		destinations.add(list.get(i).getDestinations());
+		}
+		
+		
+		return destinations;
+	}
+	@Override
+	public List<Schedual> findByStartDate(String date) {
+		
+		return repo.findByStartDate(date);
 	}
 
 }

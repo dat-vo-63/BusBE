@@ -12,13 +12,13 @@
 //
 //@Configuration
 //public class EmailConfig {
-//@Value("$(spring.mail.host)")
+//@Value("${spring.mail.host}")
 //private static String mailHost;
-//@Value("$(spring.mail.port)")
+//@Value("${spring.mail.port}")
 //private static String mailPort;
-//@Value("$(spring.mail.username)")
+//@Value("${spring.mail.username}")
 //private static String mailUserName;
-//@Value("$(spring.mail.password)")
+//@Value("${spring.mail.password}")
 //private static String mailPassword;
 //
 //@Bean

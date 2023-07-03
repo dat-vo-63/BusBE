@@ -20,4 +20,8 @@ public interface ISchedule {
  public List<Schedual> findbyBusId(long busId);
  public String checkUpdate(long scheduleId);
  public List<Schedual> findAll();
+ public List<Schedual> findByStartDateAndDepartureAndDestinations(String startDate,String Depart,String Des);
+ public Set<String> getAllDeparture(String date);
+ public Set<String> getAllDestinations(String date);
+public List<Schedual> findByStartDate(String date);
 }
