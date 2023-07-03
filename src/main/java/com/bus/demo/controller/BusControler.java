@@ -123,7 +123,7 @@ public class BusControler {
 	public List<String> getStartTime(@RequestBody Schedual schedual,@PathVariable long id) {
 		return  schedule.getStartTime(id,schedual.getStartDate());
 	}
-	@GetMapping("/get-schedule-start-date")
+	@PutMapping("/get-schedule-start-date")
 	public List<Schedual> getAllByStartDate(@RequestBody Map<String, String> map)
 	{
 		return schedule.findByStartDate(map.get("startDate"));
