@@ -70,6 +70,57 @@ SeatRepo seatRepo;
 			System.out.println("null");
 		}
 		else {
+			String timestart = null;
+			String timeStart = schedual.getStartTime();
+			String arr[] = timeStart.split(":");
+			int h = Integer.parseInt(arr[0]);
+			int m = Integer.parseInt(arr[1]);
+			if(h<10)
+			{
+				arr[0]= "0"+arr[0];
+			}
+			if(m <10)
+			{
+				arr[1]= "0"+arr[1];
+			}
+			timestart = arr[0]+":"+ arr[1];
+			System.out.println(timestart);
+			String timeend = null;
+			String timeEnd = schedual.getEndTime();
+			String arrEnd[] = timeEnd.split(":");
+			int hend = Integer.parseInt(arrEnd[0]);
+			int mend = Integer.parseInt(arrEnd[1]);
+			if(hend<10)
+			{
+				arrEnd[0]= "0"+arrEnd[0];
+			}
+			if(mend <10)
+			{
+				arrEnd[1]= "0"+arrEnd[1];
+			}
+			timeend = arrEnd[0]+":"+ arrEnd[1];
+			
+			String startdate = null;
+			String startDate = schedual.getStartDate();
+			String arrdate[]= startDate.split("/");
+			int day= Integer.parseInt(arrdate[2]);
+			int month = Integer.parseInt(arrdate[1]);
+			
+			if(day<10)
+			{
+				arrdate[2] = "0"+arrdate[2];
+			}
+			if(month < 10)
+			{
+				arrdate[1] = "0"+arrdate[1];
+			}
+			startDate = arrdate[0]+"/"+arrdate[1]+"/"+arrdate[2];
+			
+			System.out.println(timeend);
+			System.out.println(startDate);
+			schedual.setStartDate(startDate);
+			schedual.setStartTime(timestart);
+			schedual.setEndTime(timeend);
 			schedual.setTotalSeat(bus.getSeat());
 			schedual.setSeatLeft(bus.getSeat());
 		for(int i=1;i<=schedual.getTotalSeat();i++)
