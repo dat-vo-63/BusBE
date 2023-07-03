@@ -92,6 +92,10 @@ public class BusControler {
 	public Schedual addSche(@RequestBody Schedual schedual) {
 		return  schedule.saveSchedual(schedual);
 	}
+	@GetMapping("/find-all-schedule")
+	public List<Schedual> findAll(){
+		return schedule.findAll();
+	}
 	@GetMapping("/get-schedule-start-time")
 	public Schedual getScheduleByStartTime(@RequestBody Schedual schedual) {
 		return  schedule.findScheduleByStartTime(schedual.getStartTime());

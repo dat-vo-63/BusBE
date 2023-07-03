@@ -257,5 +257,10 @@ SeatRepo seatRepo;
 			return "You can Update";
 		}
 	}
+	@Override
+	public List<Schedual> findAll() {
+		// TODO Auto-generated method stub
+		return repo.findAll();
+	}
 
 }

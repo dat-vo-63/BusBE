@@ -19,4 +19,5 @@ public interface ISchedule {
  public List<String> getSeatBooked(long busId,String startDate,String startTime);
  public List<Schedual> findbyBusId(long busId);
  public String checkUpdate(long scheduleId);
+ public List<Schedual> findAll();
 }
