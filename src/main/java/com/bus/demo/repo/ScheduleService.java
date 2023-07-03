@@ -295,6 +295,18 @@ SeatRepo seatRepo;
 	@Override
 	public List<Schedual> findByStartDate(String date) {
 		
+		String arr[] = date.split("/");
+		int day = Integer.parseInt(arr[2]);
+		int month= Integer.parseInt(arr[1]);
+		if(day<10)
+		{
+			arr[2]= "0"+arr[2];
+		}
+		if(month<10)
+		{
+			arr[1]= "0" +arr[1];
+		}
+		date = arr[0]+"/"+arr[1]+"/"+arr[2];
 		return repo.findByStartDate(date);
 	}
 
