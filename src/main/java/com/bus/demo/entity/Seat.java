@@ -41,6 +41,17 @@ public class Seat implements Comparable<Seat> {
 	@JoinColumn(name = "ticketId",referencedColumnName = "ticketId")
 	private Ticket ticket;
 	
+	public Seat(String seatNo) {
+		super();
+		this.seatNo = seatNo;
+	}
+	public Seat(long seatId) {
+		super();
+		this.seatId = seatId ;
+	}
+	public Seat() {
+		super();
+	}
 	@JsonIdentityInfo(
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "scheduleId")

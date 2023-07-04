@@ -1,6 +1,8 @@
 package com.bus.demo.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -204,12 +206,25 @@ public class BusControler {
 		return iBill.getDetailBill();
 	}
 	@PostMapping("/addTicket")
-	public List<Integer> addTickk(@RequestBody Map<String, Integer> map)
+	public String addTickk(@RequestBody Ticket ticket)
 	{
-		List<Integer> num = new ArrayList<>();
-		for(int i =0;i<map.size();i++) {
-			num.add(map.get(""+i+""));
+		List<Long> list = new ArrayList<>();
+		for(int i=0;i<=ticket.getSeats().size()-1;i++)
+		{
+		long a = Long.parseLong (ticket.getSeats().get(i).getSeatNo());
+		System.out.println(a);
+		list.add(a);
 		}
-		return num;
+		
+		
+		return ticketService.saveTicket(list)?"Add Success":"Error";
+		
+//		List<String> integeres= new ArrayList<>();
+//		for(int i=0;i<=map.size()-1;i++)
+//		{
+//			String a=map.get(i).get(""+i+"");
+//			integeres.add(a);
+//		}
+//		return integeres;
 	}
 	}

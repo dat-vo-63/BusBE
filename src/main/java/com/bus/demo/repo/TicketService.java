@@ -18,13 +18,14 @@ TicketRepo repo;
 @Autowired
 SeatRepo repo2;
 	@Override
-	public boolean saveTicket(Ticket ticket) {
+	public boolean saveTicket(List<Long> seatId) {
 		List<Seat> seats = new ArrayList<>();
 		boolean check = false;
+		Ticket ticket = new Ticket();
 //		Schedual schedual = null;
-		for(int i =0;i<ticket.getSeats().size();i++)
+		for(int i =0;i<seatId.size();i++)
 		{
-			Seat seat = repo2.findById(ticket.getSeats().get(i).getSeatId());
+			Seat seat = repo2.findBySeatId(seatId.get(i)) ;
 			seat.getSchedual().setSeatLeft(seat.getSchedual().getSeatLeft()-1);
 			if(seat.getTicket()==null)
 			{

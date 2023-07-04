@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.bus.demo.entity.Seat;
 
 public interface SeatRepo extends JpaRepository<Seat, Long> {
-	public Seat findById(long seatId);
+	public Seat findBySeatId(long seatId);
 	@Query ("Select s FROM Seat s where s.ticket.ticketId =:id")
 	public List<Seat> findByTicketId(long id);
 }

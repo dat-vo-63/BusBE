@@ -7,5 +7,5 @@ import com.bus.demo.entity.Seat;
 import com.bus.demo.entity.Ticket;
 
 public interface ITicket {
-public boolean saveTicket(Ticket ticket);
+public boolean saveTicket(List<Long> seatId);
 }
