@@ -266,6 +266,18 @@ SeatRepo seatRepo;
 	@Override
 	public List<Schedual> findByStartDateAndDepartureAndDestinations(String startDate, String Depart, String Des) {
 		// TODO Auto-generated method stub
+		String arr[] = startDate.split("/");
+		int day= Integer.parseInt(arr[2]);
+		int month = Integer.parseInt(arr[1]);
+		if(day<10)
+		{
+			arr[2]= "0"+arr[2];
+		}
+		if(month<10)
+		{
+			arr[1]="0"+arr[1];
+		}
+		startDate = arr[0]+"/"+arr[1]+"/"+arr[2];
 		return repo.findByStartDateAndDepartureAndDestinations(startDate, Depart, Des);
 	}
 	@Override
