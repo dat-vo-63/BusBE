@@ -132,23 +132,23 @@ public class BusControler {
 	{
 		return schedule.findByStartDate(map.get("startDate"));
 	}
-	@GetMapping("/get-departure")
+	@PutMapping("/get-departure")
 	public Set<String> getAllDepartureByStartDate(@RequestBody Map<String, String> map)
 	{
 		return schedule.getAllDeparture(map.get("startDate"));
 	}
-	@GetMapping("/get-destinations")
+	@PutMapping("/get-destinations")
 	public Set<String> getAllDestinationsByStartDate(@RequestBody Map<String, String> map)
 	{
 		return schedule.getAllDestinations(map.get("startDate"));
 	}
 	
 	
-	@PostMapping ("/add-ticket")
-	public String  addTicket(@RequestBody Ticket ticket) {
-		return ticketService.saveTicket(ticket)?"Add Success":"Sorry seat already booked";
-	
-	}
+//	@PostMapping ("/add-ticket")
+//	public String  addTicket(@RequestBody Ticket ticket) {
+//		return ticketService.saveTicket(ticket)?"Add Success":"Sorry seat already booked";
+//	
+//	}
 	@GetMapping("/find-seat/{id}")
 	public List<Seat> findSeatByTicket(@PathVariable long id)
 	{
