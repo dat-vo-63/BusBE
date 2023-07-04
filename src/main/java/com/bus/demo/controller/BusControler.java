@@ -202,9 +202,9 @@ public class BusControler {
 		return schedule.getSeatBooked(Long.parseLong(map.get("busId")), map.get("startDate"), map.get("startTime"));
 	}
 	@PutMapping("/find-seat-booked-by-schedule")
-	public List<Long> listSeatBooked(@RequestBody Map<String, String> map)
+	public List<Long> listSeatBooked(@RequestBody Map<String, Long> map)
 	{
-		return schedule.findSeatBookedByScheduleId(Long.parseLong(map.get("scheduleId")));
+		return schedule.findSeatBookedByScheduleId(map.get("scheduleId"));
 	}
 	@GetMapping("/find-Bill")
 	public List<GetInfor> findInfo() {
