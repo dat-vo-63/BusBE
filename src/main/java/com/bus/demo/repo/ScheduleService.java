@@ -349,7 +349,9 @@ SeatRepo seatRepo;
 		List<Schedual> listSchedule = repo.findByStartDate(date);
 		for(int i=0;i<=listSchedule.size()-1;i++)
 		{
-			Collections.sort(listSchedule.get(i).getSeats(), new SortBySeatId());
+			List<Seat> seats = listSchedule.get(i).getSeats();
+			Collections.sort(seats);
+			listSchedule.get(i).setSeats(seats);
 		}
 		return listSchedule;
 		
@@ -376,9 +378,9 @@ SeatRepo seatRepo;
 	@Override
 	public List<Seat> findSeatByScheduleId(long scheduleId) {
 		Schedual schedual = repo.findById(scheduleId);
-		List<Seat> list = schedual.getSeats();
-		Collections.sort(list);
-		return list;
+		List<Seat> seats = schedual.getSeats();
+		Collections.sort(seats);
+		return seats;
 	}
 
 }

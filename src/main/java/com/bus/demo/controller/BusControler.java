@@ -135,12 +135,6 @@ public class BusControler {
 	public List<Schedual> getAllByStartDate(@RequestBody Map<String, String> map)
 	{
 		List<Schedual> list= schedule.findByStartDate(map.get("startDate"));
-		Collections.sort(list);
-		for(int i=0;i<=list.size();i++)
-		{
-			List<Seat> seats = list.get(i).getSeats();
-			Collections.sort(seats);
-		}
 		return list;
 	}
 	@PutMapping("/get-departure")
