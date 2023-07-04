@@ -1,6 +1,7 @@
 package com.bus.demo.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,6 +20,23 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "ticket")
 public class Ticket {
+	@Override
+	public int hashCode() {
+		return Objects.hash(bill, seats, ticketId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ticket other = (Ticket) obj;
+		return Objects.equals(bill, other.bill) && Objects.equals(seats, other.seats) && ticketId == other.ticketId;
+	}
+
 	@Id
 	@GeneratedValue
 	private long ticketId;

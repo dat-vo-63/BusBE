@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.bus.demo.entity.Bus;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
+import com.bus.demo.entity.SortBySeatId;
 
 @Service
 public class ScheduleService implements ISchedule{
@@ -344,7 +346,13 @@ SeatRepo seatRepo;
 		}
 		date = arr[0]+"/"+arr[1]+"/"+arr[2];
 		System.out.println(date);
-		return repo.findByStartDate(date);
+		List<Schedual> listSchedule = repo.findByStartDate(date);
+		for(int i=0;i<=listSchedule.size()-1;i++)
+		{
+			Collections.sort(listSchedule.get(i).getSeats(), new SortBySeatId());
+		}
+		return listSchedule;
+		
 	}
 	@Override
 	public List<Long> findSeatBookedByScheduleId(long scheduleId) {

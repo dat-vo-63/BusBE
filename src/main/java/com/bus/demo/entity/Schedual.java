@@ -1,6 +1,7 @@
 package com.bus.demo.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -36,6 +37,28 @@ public class Schedual implements Comparable<Schedual> {
 	@Column(name = "start_time")
 	@Temporal(TemporalType.TIME)
 	private String startTime;
+	@Override
+	public int hashCode() {
+		return Objects.hash(bus, departure, destinations, endTime, scheduleId, seatLeft, seats, startDate, startTime,
+				totalSeat);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Schedual other = (Schedual) obj;
+		return Objects.equals(bus, other.bus) && Objects.equals(departure, other.departure)
+				&& Objects.equals(destinations, other.destinations) && Objects.equals(endTime, other.endTime)
+				&& Objects.equals(scheduleId, other.scheduleId) && seatLeft == other.seatLeft
+				&& Objects.equals(seats, other.seats) && Objects.equals(startDate, other.startDate)
+				&& Objects.equals(startTime, other.startTime) && totalSeat == other.totalSeat;
+	}
+
 	@Column(name = "end_time")
 	private String endTime;
 	@Column(name = "totalSeat")

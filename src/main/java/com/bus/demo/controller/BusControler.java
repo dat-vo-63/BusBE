@@ -1,6 +1,8 @@
 package com.bus.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -98,10 +100,12 @@ public class BusControler {
 	public List<Schedual> findAll(){
 		return schedule.findAll();
 	}
-	@GetMapping("/find-schedule-start-time-depart-des")
+	@PutMapping("/find-schedule-start-time-depart-des")
 	public List<Schedual> findScheduleByStartTimeAndDepAndDes(@RequestBody Map<String, String> map)
 	{
-		return schedule.findByStartDateAndDepartureAndDestinations(map.get("startDate"),map.get("departure"), map.get("destinations"));
+		List<Schedual> scheduals= schedule.findByStartDateAndDepartureAndDestinations(map.get("startDate"),map.get("departure"), map.get("destinations"));
+		return scheduals;
+		
 	}
 	@GetMapping("/get-schedule-start-time")
 	public Schedual getScheduleByStartTime(@RequestBody Schedual schedual) {
@@ -130,7 +134,14 @@ public class BusControler {
 	@PutMapping("/get-schedule-start-date")
 	public List<Schedual> getAllByStartDate(@RequestBody Map<String, String> map)
 	{
-		return schedule.findByStartDate(map.get("startDate"));
+		List<Schedual> list= schedule.findByStartDate(map.get("startDate"));
+		Collections.sort(list);
+		for(int i=0;i<=list.size();i++)
+		{
+			List<Seat> seats = list.get(i).getSeats();
+			Collections.sort(seats);
+		}
+		return list;
 	}
 	@PutMapping("/get-departure")
 	public Set<String> getAllDepartureByStartDate(@RequestBody Map<String, String> map)
@@ -204,7 +215,9 @@ public class BusControler {
 	@PutMapping("/find-seat-booked-by-schedule")
 	public List<Long> listSeatBooked(@RequestBody Map<String, Long> map)
 	{
-		return schedule.findSeatBookedByScheduleId(map.get("scheduleId"));
+		List<Long> list = schedule.findSeatBookedByScheduleId(map.get("scheduleId"));
+		
+		return list;
 	}
 	@GetMapping("/find-Bill")
 	public List<GetInfor> findInfo() {
