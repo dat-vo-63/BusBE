@@ -270,6 +270,18 @@ SeatRepo seatRepo;
 	}
 	@Override
 	public Set<String> getAllDeparture(String date) {
+		String arr[] = date.split("/");
+		int day= Integer.parseInt(arr[2]);
+		int month = Integer.parseInt(arr[1]);
+		if(day<10)
+		{
+			arr[2]= "0"+arr[2];
+		}
+		if(month<10)
+		{
+			arr[1]="0"+arr[1];
+		}
+		date = arr[0]+"/"+arr[1]+"/"+arr[2];
 		List<Schedual> list = repo.findByStartDate(date);
 		Set<String> departure= new HashSet<>();
 		for(int i =0;i<=list.size()-1;i++)
@@ -282,6 +294,18 @@ SeatRepo seatRepo;
 	}
 	@Override
 	public Set<String> getAllDestinations(String date) {
+		String arr[] = date.split("/");
+		int day= Integer.parseInt(arr[2]);
+		int month = Integer.parseInt(arr[1]);
+		if(day<10)
+		{
+			arr[2]= "0"+arr[2];
+		}
+		if(month<10)
+		{
+			arr[1]="0"+arr[1];
+		}
+		date = arr[0]+"/"+arr[1]+"/"+arr[2];
 		List<Schedual> list = repo.findByStartDate(date);
 		Set<String> destinations= new HashSet<>();
 		for(int i =0;i<=list.size()-1;i++)

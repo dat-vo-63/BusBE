@@ -217,7 +217,7 @@ public class BusControler {
 		}
 		
 		
-		return ticketService.saveTicket(list)?"Add Success":"Error";
+		return ticketService.saveTicket(list);
 		
 //		List<String> integeres= new ArrayList<>();
 //		for(int i=0;i<=map.size()-1;i++)

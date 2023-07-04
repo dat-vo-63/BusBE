@@ -18,7 +18,7 @@ TicketRepo repo;
 @Autowired
 SeatRepo repo2;
 	@Override
-	public boolean saveTicket(List<Long> seatId) {
+	public String saveTicket(List<Long> seatId) {
 		List<Seat> seats = new ArrayList<>();
 		boolean check = false;
 		Ticket ticket = new Ticket();
@@ -46,8 +46,9 @@ SeatRepo repo2;
 		ticket.setSeats(seats);
 	
 		repo.save(ticket);
+		return ""+ticket.getTicketId()+"";
 		}
-		return check;
+		return "Seats May Be Have Been Booked";
 		
 	}
 	
