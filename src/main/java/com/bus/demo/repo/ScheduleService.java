@@ -363,11 +363,22 @@ SeatRepo seatRepo;
 				if(schedual.getSeats().get(i).getTicket()!=null)
 				{
 					seatIds.add(schedual.getSeats().get(i).getSeatId());
+					Collections.sort(schedual.getSeats(),new SortBySeatId());
 				}
 			}
+			
+		
+			
 		return seatIds;
 		}
 		return null;
+	}
+	@Override
+	public List<Seat> findSeatByScheduleId(long scheduleId) {
+		Schedual schedual = repo.findById(scheduleId);
+		List<Seat> list = schedual.getSeats();
+		Collections.sort(list);
+		return list;
 	}
 
 }

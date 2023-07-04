@@ -25,4 +25,5 @@ public interface ISchedule {
  public Set<String> getAllDestinations(String date);
 public List<Schedual> findByStartDate(String date);
 public List<Long> findSeatBookedByScheduleId(long scheduleId);
+public List<Seat> findSeatByScheduleId(long scheduleId);
 }

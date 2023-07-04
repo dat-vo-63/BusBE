@@ -96,7 +96,7 @@ public class Seat implements Comparable<Seat> {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(schedual, seatId, seatNo, seatPrice, ticket);
+		return Objects.hash(seatId);
 	}
 	@Override
 	public boolean equals(Object obj) {

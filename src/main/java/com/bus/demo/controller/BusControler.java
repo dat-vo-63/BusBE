@@ -223,7 +223,7 @@ public class BusControler {
 	public List<GetInfor> findInfo() {
 		return iBill.getDetailBill();
 	}
-	@PostMapping("/addTicket")
+	@PostMapping("/add-ticket")
 	public String addTickk(@RequestBody Ticket ticket)
 	{
 		List<Long> list = new ArrayList<>();
@@ -244,5 +244,10 @@ public class BusControler {
 //			integeres.add(a);
 //		}
 //		return integeres;
+	}
+	@GetMapping("/list-seat-by-Schedule")
+	public List<Seat> findSeatByScheduleId(@RequestBody Map<String, Long> map)
+	{
+		return schedule.findSeatByScheduleId(map.get("scheduleId"));
 	}
 	}
