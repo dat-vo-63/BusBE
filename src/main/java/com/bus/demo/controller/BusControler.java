@@ -201,6 +201,11 @@ public class BusControler {
 	{
 		return schedule.getSeatBooked(Long.parseLong(map.get("busId")), map.get("startDate"), map.get("startTime"));
 	}
+	@GetMapping("/find-seat-booked-by-schedule")
+	public List<Long> listSeatBooked(@RequestBody Map<String, String> map)
+	{
+		return schedule.findSeatBookedByScheduleId(Long.parseLong(map.get("scheduleId")));
+	}
 	@GetMapping("/find-Bill")
 	public List<GetInfor> findInfo() {
 		return iBill.getDetailBill();

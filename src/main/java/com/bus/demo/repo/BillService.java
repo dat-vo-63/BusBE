@@ -140,6 +140,12 @@ public class BillService implements IBill {
 			getInfor.setStartDate(tickets.get(i).getSeats().get(0).getSchedual().getStartDate());
 			getInfor.setPrice(tickets.get(i).getBill().getTotalPrice());
 			getInfor.setStartTime(tickets.get(i).getSeats().get(0).getSchedual().getStartTime());
+			getInfor.setUserName(tickets.get(i).getBill().getUser().getUserName());
+			getInfor.setUserPhone(tickets.get(i).getBill().getUser().getPhoneNumber());
+			getInfor.setDeparture(tickets.get(i).getSeats().get(0).getSchedual().getDeparture());
+			getInfor.setDestination(tickets.get(i).getSeats().get(0).getSchedual().getDestinations());
+			getInfor.setStatus(tickets.get(i).getBill().getBillStatus());
+			getInfor.setBusName(tickets.get(i).getSeats().get(0).getSchedual().getBus().getName());
 			for(int j=0;j<=tickets.get(i).getSeats().size()-1;j++) {
 				seatNo.add(tickets.get(i).getSeats().get(j).getSeatNo());
 			}

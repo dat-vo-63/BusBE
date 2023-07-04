@@ -334,5 +334,20 @@ SeatRepo seatRepo;
 		System.out.println(date);
 		return repo.findByStartDate(date);
 	}
+	@Override
+	public List<Long> findSeatBookedByScheduleId(long scheduleId) {
+		List<Long> seatIds = new ArrayList<>();
+		Schedual schedual = repo.findById(scheduleId);
+		if(schedual!= null) {
+			for(int i =0;i<=schedual.getSeats().size()-1;i++) {
+				if(schedual.getSeats().get(i).getTicket()!=null)
+				{
+					seatIds.add(schedual.getSeats().get(i).getSeatId());
+				}
+			}
+		return seatIds;
+		}
+		return null;
+	}
 
 }

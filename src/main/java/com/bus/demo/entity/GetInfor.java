@@ -11,6 +11,48 @@ private String startDate;
 private String startTime;
 private List<String> seatNumber;
 private int price;
+private String destination;
+private String departure;
+private String status;
+private String userName;
+private String userPhone;
+private String busName;
+public String getDestination() {
+	return destination;
+}
+public void setDestination(String destination) {
+	this.destination = destination;
+}
+public String getDeparture() {
+	return departure;
+}
+public void setDeparture(String departure) {
+	this.departure = departure;
+}
+public String getStatus() {
+	return status;
+}
+public void setStatus(String status) {
+	this.status = status;
+}
+public String getUserName() {
+	return userName;
+}
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+public String getUserPhone() {
+	return userPhone;
+}
+public void setUserPhone(String userPhone) {
+	this.userPhone = userPhone;
+}
+public String getBusName() {
+	return busName;
+}
+public void setBusName(String busName) {
+	this.busName = busName;
+}
 public long getBillId() {
 	return billId;
 }
