@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bus.demo.entity.Bill;
 import com.bus.demo.entity.GetInfor;
+import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
 import com.bus.demo.entity.Ticket;
 import com.bus.demo.entity.User;
@@ -22,6 +23,8 @@ public class BillService implements IBill {
 	TicketRepo ticketRepo;
 	@Autowired
 	SeatRepo seatRepo;
+	@Autowired
+	ScheduleRepo scheduleRepo;
 	public static Thread thread = new Thread();
 
 	@Override
@@ -50,11 +53,13 @@ public class BillService implements IBill {
 				ticket.setBill(bill);
 				ticketRepo.save(ticket);
 				System.out.println(ticket.getTicketId());
+				
 //				bill.setTickets(ticket);
 
 //				ticket.setBill(bill);
 //				ticketRepo.save(ticket);
 			}
+			CounterDown(ticketId);
 		}
 		return bill;
 	}
@@ -79,7 +84,7 @@ public class BillService implements IBill {
 	public String CounterDown(long ticketId) {
 		String check = null;
 		try {
-			for (int i = 10; i >= 0; i--) {
+			for (int i = 120; i >= 0; i--) {
 				thread.sleep(1000);
 				System.out.println(i);
 				if (i == 0) {
@@ -87,7 +92,10 @@ public class BillService implements IBill {
 					System.out.println(ticket.getTicketId());
 					Bill bill = billRepo.findByBillId(ticket.getBill().getBillId());
 					System.out.println(bill.getBillId());
-					if (bill.getBillStatus().equalsIgnoreCase("Not Pay")) {
+					int totalseatBook = ticket.getSeats().size();
+					Schedual schedual = scheduleRepo.findByScheduleId(ticket.getSeats().get(0).getSchedual().getScheduleId());
+					
+					if (bill.getBillStatus().equals("Paid")) {
 						
 						for (int j = 0; j <= ticket.getSeats().size() - 1; j++) {
 							Seat seat = ticket.getSeats().get(j);
@@ -96,10 +104,12 @@ public class BillService implements IBill {
 							seatRepo.save(seat);
 							
 						}
-						int lon = ticketRepo.deleteByBillId(ticketId);
-						int cac = billRepo.deleteByBillId(bill.getBillId());
-						System.out.println(cac);
-						System.out.println(lon);
+						int deleticket = ticketRepo.deleteByBillId(ticketId);
+						int deletebill = billRepo.deleteByBillId(bill.getBillId());
+						System.out.println(deleticket);
+						System.out.println(deletebill);
+						schedual.setSeatLeft(schedual.getSeatLeft()+totalseatBook);
+						scheduleRepo.save(schedual);
 
 						check = "Deleted";
 					} else {

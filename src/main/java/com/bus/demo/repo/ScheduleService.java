@@ -125,7 +125,7 @@ SeatRepo seatRepo;
 			schedual.setEndTime(timeend);
 			schedual.setTotalSeat(bus.getSeat());
 			schedual.setSeatLeft(bus.getSeat());
-		for(int i=1;i<=schedual.getTotalSeat();i++)
+		for(int i=0;i<=schedual.getTotalSeat()-1;i++)
 		{
 			Seat seat = new Seat();
 			seat.setSeatNo(Integer.toString(i));
@@ -157,7 +157,7 @@ SeatRepo seatRepo;
 	@Override
 	public Schedual updateSchedule(long id,Schedual schedual) {
 		Schedual schedual2 = null; 
-			schedual2 =	repo.findById(id);
+			schedual2 =	repo.findByScheduleId(id);
 			if(schedual2 == null)
 			{}
 			else
@@ -204,7 +204,7 @@ SeatRepo seatRepo;
 	@Override
 	public Schedual findScheduleById(long id) {
 		
-		return repo.findById(id);
+		return repo.findByScheduleId(id);
 	}
 	@Override
 	public Set<Bus> findBusByStartDate() {
@@ -243,7 +243,7 @@ SeatRepo seatRepo;
 	}
 	@Override
 	public String checkUpdate(long scheduleId) {
-		Schedual schedual = repo.findById(scheduleId);
+		Schedual schedual = repo.findByScheduleId(scheduleId);
 		int check =0;
 		for(int i =0;i<schedual.getSeats().size();i++)
 		{
@@ -359,7 +359,7 @@ SeatRepo seatRepo;
 	@Override
 	public List<Long> findSeatBookedByScheduleId(long scheduleId) {
 		List<Long> seatIds = new ArrayList<>();
-		Schedual schedual = repo.findById(scheduleId);
+		Schedual schedual = repo.findByScheduleId(scheduleId);
 		if(schedual!= null) {
 			for(int i =0;i<=schedual.getSeats().size()-1;i++) {
 				if(schedual.getSeats().get(i).getTicket()!=null)
@@ -377,7 +377,7 @@ SeatRepo seatRepo;
 	}
 	@Override
 	public List<Seat> findSeatByScheduleId(long scheduleId) {
-		Schedual schedual = repo.findById(scheduleId);
+		Schedual schedual = repo.findByScheduleId(scheduleId);
 		List<Seat> seats = schedual.getSeats();
 		Collections.sort(seats);
 		return seats;
