@@ -46,7 +46,7 @@ public class BillController {
 	@PostMapping("/count-down")
 	public String countdown(@RequestBody Map<String, Long> map)
 	{
-		return iBill.CounterDown(map.get("ticketId"));
+		return iBill.CounterDown(map.get("billId"));
 	}
 	@GetMapping("/find-bill/{id}")
 	public Bill findBillById(@PathVariable long id)

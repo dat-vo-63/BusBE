@@ -81,14 +81,15 @@ public class BillService implements IBill {
 	}
 
 	@Override
-	public String CounterDown(long ticketId) {
+	public String CounterDown(long billId) {
 		String check = null;
+		
 		try {
 			for (int i = 10; i >= 0; i--) {
 				thread.sleep(1000);
 				System.out.println(i);
 				if (i == 0) {
-					Ticket ticket = ticketRepo.findById(ticketId);
+					Ticket ticket = ticketRepo.findByBillId(billId);
 					System.out.println(ticket.getTicketId());
 					Bill bill = billRepo.findByBillId(ticket.getBill().getBillId());
 					System.out.println(bill.getBillId());
@@ -104,7 +105,7 @@ public class BillService implements IBill {
 							seatRepo.save(seat);
 							
 						}
-						int deleticket = ticketRepo.deleteByBillId(ticketId);
+						int deleticket = ticketRepo.deleteByBillId(ticket.getTicketId());
 						int deletebill = billRepo.deleteByBillId(bill.getBillId());
 						System.out.println(deleticket);
 						System.out.println(deletebill);
