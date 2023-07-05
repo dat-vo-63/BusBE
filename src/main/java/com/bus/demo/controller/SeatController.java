@@ -40,7 +40,7 @@ public class SeatController {
 	{
 		return iSeat.findByTicketId(id);
 	}
-	@GetMapping("/list-seat-by-Schedule")
+	@PutMapping("/list-seat-by-Schedule")
 	public List<Seat> findSeatByScheduleId(@RequestBody Map<String, Long> map)
 	{
 		return schedule.findSeatByScheduleId(map.get("scheduleId"));
