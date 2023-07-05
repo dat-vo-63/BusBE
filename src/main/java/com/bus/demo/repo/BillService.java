@@ -84,7 +84,7 @@ public class BillService implements IBill {
 	public String CounterDown(long ticketId) {
 		String check = null;
 		try {
-			for (int i = 120; i >= 0; i--) {
+			for (int i = 10; i >= 0; i--) {
 				thread.sleep(1000);
 				System.out.println(i);
 				if (i == 0) {
@@ -95,7 +95,7 @@ public class BillService implements IBill {
 					int totalseatBook = ticket.getSeats().size();
 					Schedual schedual = scheduleRepo.findByScheduleId(ticket.getSeats().get(0).getSchedual().getScheduleId());
 					
-					if (bill.getBillStatus().equals("Not Pay")) {
+					if (bill.getBillStatus().equalsIgnoreCase("Not Pay")) {
 						
 						for (int j = 0; j <= ticket.getSeats().size() - 1; j++) {
 							Seat seat = ticket.getSeats().get(j);
