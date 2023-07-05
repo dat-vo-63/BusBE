@@ -9,7 +9,7 @@ public class GetInfor {
 private long billId;
 private String startDate;
 private String startTime;
-private List<Seat> seats;
+private List<Seat> seatNumberList;
 private int price;
 private String destination;
 private String departure;
@@ -72,10 +72,10 @@ public void setStartTime(String startTime) {
 	this.startTime = startTime;
 }
 public List<Seat> getSeatNumber() {
-	return seats;
+	return seatNumberList;
 }
-public void setSeatNumber(List<Seat> seatNumber) {
-	this.seats = seatNumber;
+public void setSeatNumber(List<Seat> seats) {
+	this.seatNumberList = seats;
 }
 public int getPrice() {
 	return price;

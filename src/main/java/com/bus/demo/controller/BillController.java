@@ -43,10 +43,10 @@ public class BillController {
 		
 		return iBill.addBill((input.get("phoneNumber")),Long.parseLong(input.get("ticketId")));
 	}
-	@PostMapping("/count-down/{id}")
-	public String countdown(@PathVariable int id)
+	@PostMapping("/count-down")
+	public String countdown(@RequestBody Map<String, Long> map)
 	{
-		return iBill.CounterDown(id);
+		return iBill.CounterDown(map.get("ticketId"));
 	}
 	@GetMapping("/find-bill/{id}")
 	public Bill findBillById(@PathVariable long id)
