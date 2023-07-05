@@ -3,6 +3,9 @@ package com.bus.demo.repo;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import com.bus.demo.entity.Bus;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
@@ -26,4 +29,6 @@ public interface ISchedule {
 public List<Schedual> findByStartDate(String date);
 public List<Long> findSeatBookedByScheduleId(long scheduleId);
 public List<Seat> findSeatByScheduleId(long scheduleId);
+public List<Schedual> findScheduleWithSort(String field);
+public Page<Schedual> findScheduleWithPaginationWithSorting(int offset,int pageSize,String field);
 }

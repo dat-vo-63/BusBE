@@ -16,6 +16,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.bus.demo.entity.Bus;
@@ -382,5 +385,16 @@ SeatRepo seatRepo;
 		Collections.sort(seats);
 		return seats;
 	}
+	@Override
+	public List<Schedual> findScheduleWithSort(String field) {
+		// TODO Auto-generated method stub
+		return repo.findAll(Sort.by(Sort.Direction.ASC,field));
+	}
+	@Override
+	public Page<Schedual> findScheduleWithPaginationWithSorting(int offset, int pageSize,String field) {
+		Page<Schedual> page = repo.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+		return page;
+	}
+	
 
 }

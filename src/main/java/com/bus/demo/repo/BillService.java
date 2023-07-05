@@ -59,7 +59,7 @@ public class BillService implements IBill {
 //				ticket.setBill(bill);
 //				ticketRepo.save(ticket);
 			}
-			CounterDown(ticketId);
+//			CounterDown(ticketId);
 		}
 		return bill;
 	}
@@ -95,7 +95,7 @@ public class BillService implements IBill {
 					int totalseatBook = ticket.getSeats().size();
 					Schedual schedual = scheduleRepo.findByScheduleId(ticket.getSeats().get(0).getSchedual().getScheduleId());
 					
-					if (bill.getBillStatus().equals("Paid")) {
+					if (bill.getBillStatus().equals("Not Pay")) {
 						
 						for (int j = 0; j <= ticket.getSeats().size() - 1; j++) {
 							Seat seat = ticket.getSeats().get(j);

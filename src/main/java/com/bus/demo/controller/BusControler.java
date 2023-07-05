@@ -92,61 +92,7 @@ public class BusControler {
 	{
 	return Optional.of(busRepo.findById(id));
 	}
-	@PostMapping("/add/schedule")
-	public Schedual addSche(@RequestBody Schedual schedual) {
-		return  schedule.saveSchedual(schedual);
-	}
-	@GetMapping("/find-all-schedule")
-	public List<Schedual> findAll(){
-		return schedule.findAll();
-	}
-	@PutMapping("/find-schedule-start-time-depart-des")
-	public List<Schedual> findScheduleByStartTimeAndDepAndDes(@RequestBody Map<String, String> map)
-	{
-		List<Schedual> scheduals= schedule.findByStartDateAndDepartureAndDestinations(map.get("startDate"),map.get("departure"), map.get("destinations"));
-		return scheduals;
-		
-	}
-	@GetMapping("/get-schedule-start-time")
-	public Schedual getScheduleByStartTime(@RequestBody Schedual schedual) {
-		return  schedule.findScheduleByStartTime(schedual.getStartTime());
-	}
-	@GetMapping("/get/{id}")
-	public Schedual getSchedule(@PathVariable long id) {
-		return schedule.findScheduleById(id);
-	}
-	@GetMapping("/get-schedule-bus-id-start-time-start-date/{id}")
-	public List<Schedual> getScheduleByBusIdAndStartDateAndStartTime(@PathVariable long id,@RequestBody Schedual schedual) {
-			return schedule.findScheduleByBusIdAndStartDateAndStartTime(id, schedual.getStartDate(), schedual.getStartTime());
-	}
-	@PostMapping("/update-schedule/{id}")
-	public Schedual updateSchedule(@RequestBody Schedual schedual,@PathVariable long id) {
-		return  schedule.updateSchedule(id, schedual);
-	}
-	@GetMapping("/check-update/{id}")
-	public String checkUpdate(@PathVariable("id") long id) {
-		return  schedule.checkUpdate(id);
-	}
-	@GetMapping("/get-start-time/{id}")
-	public List<String> getStartTime(@RequestBody Schedual schedual,@PathVariable long id) {
-		return  schedule.getStartTime(id,schedual.getStartDate());
-	}
-	@PutMapping("/get-schedule-start-date")
-	public List<Schedual> getAllByStartDate(@RequestBody Map<String, String> map)
-	{
-		List<Schedual> list= schedule.findByStartDate(map.get("startDate"));
-		return list;
-	}
-	@PutMapping("/get-departure")
-	public Set<String> getAllDepartureByStartDate(@RequestBody Map<String, String> map)
-	{
-		return schedule.getAllDeparture(map.get("startDate"));
-	}
-	@PutMapping("/get-destinations")
-	public Set<String> getAllDestinationsByStartDate(@RequestBody Map<String, String> map)
-	{
-		return schedule.getAllDestinations(map.get("startDate"));
-	}
+	
 	
 	
 //	@PostMapping ("/add-ticket")
@@ -154,82 +100,14 @@ public class BusControler {
 //		return ticketService.saveTicket(ticket)?"Add Success":"Sorry seat already booked";
 //	
 //	}
-	@GetMapping("/find-seat/{id}")
-	public List<Seat> findSeatByTicket(@PathVariable long id)
-	{
-		return iSeat.findByTicketId(id);
-	}
-	@PostMapping("/addBill")
-	public Bill addBill(@RequestBody Map<String, String> input)
-	{
-		
-		return iBill.addBill((input.get("phoneNumber")),Long.parseLong(input.get("ticketId")));
-	}
-	@PostMapping ("/add-user")
-	public String addUser(@RequestBody User user) {
-		return iUser.save(user);
-	}
-	@PostMapping("/count-down/{id}")
-	public String countdown(@PathVariable int id)
-	{
-		return iBill.CounterDown(id);
-	}
-	@GetMapping("/find-bill/{id}")
-	public Bill findBillById(@PathVariable long id)
-	{
-		return iBill.findById(id);
-	}
-	@DeleteMapping("/delete")
-	public String deleted(@RequestBody Bill bill)
-	{
-		return iBill.delete(bill.getBillId());
-	}
-	@PostMapping("/payment/{billId}")
-	public String payment(@PathVariable Long billId) {
-		return iBill.Pay(billId);
-	}
-	@PostMapping("/login")
-	public User login(@RequestBody User user) {
-		return iUser.login(user.getEmail(), user.getPassword());
-	}
-	@PostMapping("/update-user")
-	public String Update(@RequestBody User user)
-	{
-		return iUser.updateUser(user);
-	}
-	@GetMapping("/find-By-Email/{email}")
-	public User findByEmail(@PathVariable ("email")  String email) {
-		return iUser.findByEmail(email);
-	}
-	@GetMapping("/find-seat-booked")
-	public List<String> SeatBooked(@RequestBody Map<String, String> map)
-	{
-		return schedule.getSeatBooked(Long.parseLong(map.get("busId")), map.get("startDate"), map.get("startTime"));
-	}
-	@PutMapping("/find-seat-booked-by-schedule")
-	public List<Long> listSeatBooked(@RequestBody Map<String, Long> map)
-	{
-		List<Long> list = schedule.findSeatBookedByScheduleId(map.get("scheduleId"));
-		
-		return list;
-	}
-	@GetMapping("/find-Bill")
-	public List<GetInfor> findInfo() {
-		return iBill.getDetailBill();
-	}
-	@PostMapping("/add-ticket")
-	public String addTickk(@RequestBody Ticket ticket)
-	{
-		List<Long> list = new ArrayList<>();
-		for(int i=0;i<=ticket.getSeats().size()-1;i++)
-		{
-		long a = Long.parseLong (ticket.getSeats().get(i).getSeatNo());
-		System.out.println(a);
-		list.add(a);
-		}
-		
-		
-		return ticketService.saveTicket(list);
+	
+	
+	
+	
+	
+	
+	
+	
 		
 //		List<String> integeres= new ArrayList<>();
 //		for(int i=0;i<=map.size()-1;i++)
@@ -239,9 +117,5 @@ public class BusControler {
 //		}
 //		return integeres;
 	}
-	@GetMapping("/list-seat-by-Schedule")
-	public List<Seat> findSeatByScheduleId(@RequestBody Map<String, Long> map)
-	{
-		return schedule.findSeatByScheduleId(map.get("scheduleId"));
-	}
-	}
+	
+	
