@@ -144,7 +144,7 @@ public class BillService implements IBill {
 		List<GetInfor> getInfors = new ArrayList<>();
 		for(int i=0;i<=tickets.size()-1;i++)
 		{
-			List<String> seatNo = new ArrayList<>();
+			List<Seat> seatNo = new ArrayList<>();
 			GetInfor getInfor = new GetInfor();
 			getInfor.setBillId(tickets.get(i).getBill().getBillId());
 			getInfor.setStartDate(tickets.get(i).getSeats().get(0).getSchedual().getStartDate());
@@ -157,7 +157,7 @@ public class BillService implements IBill {
 			getInfor.setStatus(tickets.get(i).getBill().getBillStatus());
 			getInfor.setBusName(tickets.get(i).getSeats().get(0).getSchedual().getBus().getName());
 			for(int j=0;j<=tickets.get(i).getSeats().size()-1;j++) {
-				seatNo.add(tickets.get(i).getSeats().get(j).getSeatNo());
+				seatNo.add(tickets.get(i).getSeats().get(j));
 			}
 			getInfor.setSeatNumber(seatNo);
 			getInfors.add(getInfor);
@@ -170,7 +170,7 @@ public class BillService implements IBill {
 	@Override
 	public GetInfor getDetailBillId(long billId) {
 //		Bill bill =billRepo.findByBillId(billId);
-		List<String> seatNo = new ArrayList<>();
+		List<Seat> seatNo = new ArrayList<>();
 		Ticket ticket= ticketRepo.findByBillId(billId);
 		GetInfor getInfor = new GetInfor();
 		getInfor.setBillId(ticket.getBill().getBillId());
@@ -184,7 +184,7 @@ public class BillService implements IBill {
 		getInfor.setStatus(ticket.getBill().getBillStatus());
 		getInfor.setBusName(ticket.getSeats().get(0).getSchedual().getBus().getName());
 		for(int j=0;j<=ticket.getSeats().size()-1;j++) {
-			seatNo.add(ticket.getSeats().get(j).getSeatNo());
+			seatNo.add(ticket.getSeats().get(j));
 		}
 		getInfor.setSeatNumber(seatNo);
 		return  getInfor;
