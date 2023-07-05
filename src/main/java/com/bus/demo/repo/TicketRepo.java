@@ -14,5 +14,7 @@ public Ticket findById(long id);
 @Modifying(clearAutomatically = true)
 @Query("DELETE FROM Ticket  where ticketId =:ticketId")
 public int deleteByBillId(@Param ("ticketId") long ticketId);
+@Query("SELECT DISTINCT t FROM Ticket t where t.bill.billId=:billId")
+public Ticket findByBillId(@Param("billId") long billId);
 }
 

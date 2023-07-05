@@ -12,4 +12,6 @@ public interface IBill {
 	public Bill findById(long billId);
 	public String delete(long billId) ;
 	public List<GetInfor> getDetailBill();
+	public GetInfor getDetailBillId(long billId);
+	
 	}
