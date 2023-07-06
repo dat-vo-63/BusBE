@@ -175,7 +175,9 @@ public class BillService implements IBill {
 //		Bill bill =billRepo.findByBillId(billId);
 		List<Seat> seatNo = new ArrayList<>();
 		Ticket ticket= ticketRepo.findByBillId(billId);
-		GetInfor getInfor = new GetInfor();
+		GetInfor getInfor = null;
+		if(ticket!=null) {
+		 getInfor = new GetInfor();
 		getInfor.setBillId(ticket.getBill().getBillId());
 		getInfor.setStartDate(ticket.getSeats().get(0).getSchedual().getStartDate());
 		getInfor.setPrice(ticket.getBill().getTotalPrice());
@@ -190,6 +192,7 @@ public class BillService implements IBill {
 			seatNo.add(ticket.getSeats().get(j));
 		}
 		getInfor.setSeatNumber(seatNo);
+		}
 		return  getInfor;
 	}
 
