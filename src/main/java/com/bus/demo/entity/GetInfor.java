@@ -101,7 +101,6 @@ public void setPrice(int price) {
 }
 @Override
 public int compareTo(GetInfor o) {
-	// TODO Auto-generated method stub
 	return (int) (this.billId - o.billId);
 }
 }
