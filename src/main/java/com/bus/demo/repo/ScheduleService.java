@@ -164,9 +164,51 @@ SeatRepo seatRepo;
 			
 			if (schedual2 != null && schedual2.getSeatLeft() == schedual2.getBus().getSeat())
 			{
-				schedual2.setStartDate(schedual.getStartDate());
-				schedual2.setStartTime(schedual.getStartTime());
-				schedual2.setEndTime(schedual.getEndTime());
+				String arr[] = schedual.getStartDate().split("/");
+				int day = Integer.parseInt(arr[2]);
+				int month= Integer.parseInt(arr[1]);
+				if(day<10)
+				{
+					arr[2]= "0"+arr[2];
+				}
+				if(month<10)
+				{
+					arr[1]= "0" +arr[1];
+				}
+				//Tranfers
+				String schedualStartDate = arr[0]+"/"+arr[1]+"/"+arr[2];
+				//-------------------------------------------
+				String timeStart = schedual.getStartTime();
+				String arr1[] = timeStart.split(":");
+				int h = Integer.parseInt(arr1[0]);
+				int m = Integer.parseInt(arr1[1]);
+				if(h<10)
+				{
+					arr1[0]= "0"+arr1[0];
+				}
+				if(m <10)
+				{
+					arr1[1]= "0"+arr1[1];
+				}
+				timeStart = arr1[0]+":"+ arr1[1];
+				//---------------------------------------------------------------
+				String timeEnd = schedual.getEndTime();
+				String arr2[] = timeEnd.split(":");
+				int he = Integer.parseInt(arr2[0]);
+				int me = Integer.parseInt(arr2[1]);
+				if(he<10)
+				{
+					arr2[0]= "0"+arr2[0];
+				}
+				if(me <10)
+				{
+					arr2[1]= "0"+arr2[1];
+				}
+				timeEnd = arr2[0]+":"+ arr2[1];
+
+				schedual2.setStartDate(schedualStartDate);
+				schedual2.setStartTime(timeStart);
+				schedual2.setEndTime(timeEnd);
 				schedual2.setDeparture(schedual.getDeparture());
 				schedual2.setDestinations(schedual.getDestinations());
 				repo.save(schedual2);
@@ -393,6 +435,40 @@ SeatRepo seatRepo;
 	public Page<Schedual> findScheduleWithPaginationWithSorting(int offset, int pageSize,String field) {
 		Page<Schedual> page = repo.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
 		return page;
+	}
+	@Override
+	public String deleteSchedule(long schedule) {
+		Date  currentDate = new Date();
+		System.out.println(currentDate);
+		LocalDateTime dateTime = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDateTime();
+		LocalDate dateTimeGetDate = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault()).toLocalDate();
+		System.out.println(dateTimeGetDate);
+		double currentTime = Double.parseDouble(dateTime.format(DateTimeFormatter.ofPattern("HH.mm")));
+		Schedual schedual = repo.findByScheduleId(schedule);
+		if(schedual!= null)
+		{
+			String schedualstartDate = schedual.getStartDate();
+			LocalDate date = LocalDate.parse(schedualstartDate);
+		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		    String formattedDate = formatter.format(date);
+		    System.out.println("Formatted date: " + formattedDate);
+		    date = LocalDate.parse(formattedDate);
+		    String scheduleTime = schedual.getStartTime();
+		    scheduleTime = scheduleTime.replace(':', '.');
+		    double scheduleTimeConvert = Double.parseDouble(scheduleTime);  
+		    if(dateTimeGetDate.isBefore(date) || dateTimeGetDate.isEqual(date) && currentTime < scheduleTimeConvert)
+		    {
+		    	repo.deleteById(schedule);
+		    	return "Deleted";
+		    }
+		    else  {
+				return "Can't Deleted";
+			}
+		}
+		return "Can't found Schedule";
 	}
 	
 

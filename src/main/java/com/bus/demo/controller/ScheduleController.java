@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.repo.IBill;
 import com.bus.demo.repo.IBus;
+import com.bus.demo.repo.ISchedule;
 import com.bus.demo.repo.ISeat;
 import com.bus.demo.repo.IUser;
 import com.bus.demo.repo.ScheduleService;
@@ -29,7 +31,7 @@ public class ScheduleController {
 	@Autowired
 	IBus Ibus;
 	@Autowired
-	ScheduleService schedule;
+	ISchedule schedule;
 	@Autowired
 	TicketService ticketService;
 	@Autowired
@@ -97,5 +99,9 @@ public class ScheduleController {
 	public Page<Schedual> getSchedulePage(@PathVariable("offset") int offset,@PathVariable ("pagesize") int pagesize,@PathVariable("field") String field)
 	{
 		return schedule.findScheduleWithPaginationWithSorting(offset, pagesize,field);
+	}
+	@DeleteMapping("/delete-schedule")
+	public String deleteSchedule(@RequestBody Map<String, Long> map) {
+		return schedule.deleteSchedule(map.get("scheduleId"));
 	}
 }
