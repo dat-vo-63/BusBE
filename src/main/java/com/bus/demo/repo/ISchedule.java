@@ -31,4 +31,5 @@ public List<Long> findSeatBookedByScheduleId(long scheduleId);
 public List<Seat> findSeatByScheduleId(long scheduleId);
 public List<Schedual> findScheduleWithSort(String field);
 public Page<Schedual> findScheduleWithPaginationWithSorting(int offset,int pageSize,String field);
+public String deleteSchedule(long schedule);
 }

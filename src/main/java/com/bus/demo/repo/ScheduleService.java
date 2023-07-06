@@ -161,15 +161,14 @@ SeatRepo seatRepo;
 	public Schedual updateSchedule(long id,Schedual schedual) {
 		Schedual schedual2 = null; 
 			schedual2 =	repo.findByScheduleId(id);
-			if(schedual2 == null)
-			{}
-			else
+			
+			if (schedual2 != null && schedual2.getSeatLeft() == schedual2.getBus().getSeat())
 			{
 				schedual2.setStartDate(schedual.getStartDate());
 				schedual2.setStartTime(schedual.getStartTime());
-				schedual2.setTotalSeat(schedual.getTotalSeat());
-				schedual2.setSeatLeft(schedual.getSeatLeft());
 				schedual2.setEndTime(schedual.getEndTime());
+				schedual2.setDeparture(schedual.getDeparture());
+				schedual2.setDestinations(schedual.getDestinations());
 				repo.save(schedual2);
 			}
 		return schedual2;
