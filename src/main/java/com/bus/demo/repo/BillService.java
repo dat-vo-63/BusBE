@@ -201,6 +201,8 @@ public class BillService implements IBill {
 		// TODO Auto-generated method stub
 		List<GetInfor> getInfors = new ArrayList<>();
 		List<Bill> bill = billRepo.findBillByBillIdLike(billId);
+		if(bill.isEmpty()== false)
+		{
 		for(int i=0; i<=bill.size()-1;i++)
 		{
 			List<Seat> seatNo = new ArrayList<>();
@@ -221,6 +223,10 @@ public class BillService implements IBill {
 			}
 			getInfor.setSeatNumber(seatNo);
 			getInfors.add(getInfor);
+		}
+		}
+		else {
+			getInfors = getDetailBill();
 		}
 		return getInfors;
 		

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,8 +72,8 @@ public class BillController {
 	{
 		return iBill.getDetailBillId(billId);
 	}
-	@GetMapping("/get-bill/{billId}")
-	public List<GetInfor> findBill(@PathVariable("billId") long billId){
-		return iBill.findByBillIdlike(billId);
+	@PutMapping("/get-bill")
+	public List<GetInfor> findBill(@RequestBody Map<String, Long> map){
+		return iBill.findByBillIdlike(map.get("billId"));
 	}
 }
