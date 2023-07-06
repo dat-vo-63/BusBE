@@ -328,23 +328,27 @@ SeatRepo seatRepo;
 	}
 	@Override
 	public Set<String> getAllDeparture(String date) {
-		String arr[] = date.split("/");
-		int day= Integer.parseInt(arr[2]);
-		int month = Integer.parseInt(arr[1]);
-		if(day<10)
+		Set<String> departure= null;
+//		String arr[] = date.split("/");
+//		int day= Integer.parseInt(arr[2]);
+//		int month = Integer.parseInt(arr[1]);
+//		if(day<10)
+//		{
+//			arr[2]= "0"+arr[2];
+//		}
+//		if(month<10)
+//		{
+//			arr[1]="0"+arr[1];
+//		}
+//		date = arr[0]+"/"+arr[1]+"/"+arr[2];
+		List<Schedual> list = findByStartDate(date);
+		if(list.isEmpty()==false)
 		{
-			arr[2]= "0"+arr[2];
-		}
-		if(month<10)
-		{
-			arr[1]="0"+arr[1];
-		}
-		date = arr[0]+"/"+arr[1]+"/"+arr[2];
-		List<Schedual> list = repo.findByStartDate(date);
-		Set<String> departure= new HashSet<>();
+		departure= new HashSet<>();
 		for(int i =0;i<=list.size()-1;i++)
 		{
 		departure.add(list.get(i).getDeparture());
+		}
 		}
 		
 		
@@ -352,31 +356,25 @@ SeatRepo seatRepo;
 	}
 	@Override
 	public Set<String> getAllDestinations(String date) {
-		String arr[] = date.split("/");
-		int day= Integer.parseInt(arr[2]);
-		int month = Integer.parseInt(arr[1]);
-		if(day<10)
+		
+		List<Schedual> list = findByStartDate(date);
+		Set<String> destinations= null;
+		if(list.isEmpty()==false)
 		{
-			arr[2]= "0"+arr[2];
-		}
-		if(month<10)
-		{
-			arr[1]="0"+arr[1];
-		}
-		date = arr[0]+"/"+arr[1]+"/"+arr[2];
-		List<Schedual> list = repo.findByStartDate(date);
-		Set<String> destinations= new HashSet<>();
+		
+			destinations= new HashSet<>();
 		for(int i =0;i<=list.size()-1;i++)
 		{
 		destinations.add(list.get(i).getDestinations());
 		}
 		
-		
+		}
 		return destinations;
 	}
 	@Override
 	public List<Schedual> findByStartDate(String date) {
-		
+		List<Schedual> listSchedule = new ArrayList<>();
+		List <Schedual> result = new ArrayList<>();
 		String arr[] = date.split("/");
 		int day = Integer.parseInt(arr[2]);
 		int month= Integer.parseInt(arr[1]);
@@ -390,14 +388,37 @@ SeatRepo seatRepo;
 		}
 		date = arr[0]+"/"+arr[1]+"/"+arr[2];
 		System.out.println(date);
-		List<Schedual> listSchedule = repo.findByStartDate(date);
+		date = date.replace('/', '-');
+		Date  currentDate = new Date();
+		System.out.println(currentDate);
+		LocalDateTime dateTime = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDateTime();
+		LocalDate dateTimeGetDate = Instant.ofEpochMilli(currentDate.getTime())
+			      .atZone(ZoneId.systemDefault()).toLocalDate();
+		System.out.println(dateTimeGetDate);
+		LocalDate dateSchedule = LocalDate.parse(date);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    String formattedDate = formatter.format(dateSchedule);
+	    System.out.println("Formatted date: " + formattedDate);
+	    dateSchedule = LocalDate.parse(formattedDate);
+	    double currentTime = Double.parseDouble(dateTime.format(DateTimeFormatter.ofPattern("HH.mm")));
+		if(dateTimeGetDate.isBefore(dateSchedule) || dateTimeGetDate.isEqual(dateSchedule))
+		{
+			date = date.replace('-', '/');
+			listSchedule= repo.findByStartDate(date);
 		for(int i=0;i<=listSchedule.size()-1;i++)
 		{
-			List<Seat> seats = listSchedule.get(i).getSeats();
-			Collections.sort(seats);
-			listSchedule.get(i).setSeats(seats);
+			String scheduleTime = listSchedule.get(i).getStartTime();
+			scheduleTime = scheduleTime.replace(':', '.');
+			double scheduleTimeConvert = Double.parseDouble(scheduleTime);
+			if(currentTime<scheduleTimeConvert)
+			{
+				result.add(listSchedule.get(i));
+			}
 		}
-		return listSchedule;
+		}
+		return result;
 		
 	}
 	@Override
