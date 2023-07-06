@@ -14,5 +14,6 @@ public interface IBill {
 	public List<GetInfor> getDetailBill();
 	public GetInfor getDetailBillId(long billId);
 	public List<GetInfor> findByBillIdlike(String billId);
+	public List<GetInfor> findBillByEmail(String email);
 	
 	}

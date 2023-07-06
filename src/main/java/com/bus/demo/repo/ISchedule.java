@@ -15,7 +15,7 @@ public interface ISchedule {
  public Schedual saveSchedual(Schedual schedual);
  public Schedual findScheduleByStartTime(String starttime);
  public Schedual findScheduleById(long id);
- public Schedual updateSchedule(long id,Schedual schedual);
+ public Schedual updateSchedule(Schedual schedual);
  public List<String> getStartTime(long busId,String startDate);
  public List<Schedual> findScheduleByBusIdAndStartDateAndStartTime(long busId,String startDate,String startTime);
  public Set<Bus> findBusByStartDate();

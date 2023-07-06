@@ -67,9 +67,9 @@ public class ScheduleController {
 	public List<Schedual> getScheduleByBusIdAndStartDateAndStartTime(@PathVariable long id,@RequestBody Schedual schedual) {
 			return schedule.findScheduleByBusIdAndStartDateAndStartTime(id, schedual.getStartDate(), schedual.getStartTime());
 	}
-	@PostMapping("/update-schedule/{id}")
-	public Schedual updateSchedule(@RequestBody Schedual schedual,@PathVariable long id) {
-		return  schedule.updateSchedule(id, schedual);
+	@PostMapping("/update-schedule")
+	public Schedual updateSchedule(@RequestBody Schedual schedual) {
+		return  schedule.updateSchedule(schedual);
 	}
 	@GetMapping("/check-update/{id}")
 	public String checkUpdate(@PathVariable("id") long id) {

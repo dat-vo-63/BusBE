@@ -158,9 +158,9 @@ SeatRepo seatRepo;
 		return list;
 	}
 	@Override
-	public Schedual updateSchedule(long id,Schedual schedual) {
+	public Schedual updateSchedule(Schedual schedual) {
 		Schedual schedual2 = null; 
-			schedual2 =	repo.findByScheduleId(id);
+			schedual2 =	repo.findByScheduleId(schedual.getScheduleId());
 			
 			if (schedual2 != null && schedual2.getSeatLeft() == schedual2.getBus().getSeat())
 			{

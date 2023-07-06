@@ -239,4 +239,34 @@ public class BillService implements IBill {
 		
 	}
 
+	@Override
+	public List<GetInfor> findBillByEmail(String email) {
+		List<Bill> bills = billRepo.findByEmail(email);
+		
+		List<GetInfor> getInfors = new ArrayList<>();
+		for(int i=0;i<=bills.size()-1;i++)
+		{
+			List<Seat> seatNo = new ArrayList<>();
+			Ticket ticket = ticketRepo.findByBillId(bills.get(i).getBillId());
+			GetInfor getInfor = new GetInfor();
+			getInfor.setBillId(ticket.getBill().getBillId());
+			getInfor.setStartDate(ticket.getSeats().get(0).getSchedual().getStartDate());
+			getInfor.setPrice(ticket.getBill().getTotalPrice());
+			getInfor.setStartTime(ticket.getSeats().get(0).getSchedual().getStartTime());
+			getInfor.setUserName(ticket.getBill().getUser().getUserName());
+			getInfor.setUserPhone(ticket.getBill().getUser().getPhoneNumber());
+			getInfor.setDeparture(ticket.getSeats().get(0).getSchedual().getDeparture());
+			getInfor.setDestination(ticket.getSeats().get(0).getSchedual().getDestinations());
+			getInfor.setStatus(ticket.getBill().getBillStatus());
+			getInfor.setBusName(ticket.getSeats().get(0).getSchedual().getBus().getName());
+			for(int j=0;j<=ticket.getSeats().size()-1;j++) {
+				seatNo.add(ticket.getSeats().get(j));
+			}
+			getInfor.setSeatNumber(seatNo);
+			getInfors.add(getInfor);
+			
+		}
+		return null;
+	}
+
 }
