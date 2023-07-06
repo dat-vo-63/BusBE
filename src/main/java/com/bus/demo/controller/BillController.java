@@ -74,6 +74,6 @@ public class BillController {
 	}
 	@PutMapping("/get-bill")
 	public List<GetInfor> findBill(@RequestBody Map<String, String> map){
-		return iBill.findByBillIdlike(Long.parseLong(map.get("billId")));
+		return iBill.findByBillIdlike((map.get("billId")));
 	}
 }

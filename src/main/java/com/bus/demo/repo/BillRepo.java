@@ -18,6 +18,6 @@ public Bill findByBillId(long billId);
 @Modifying(clearAutomatically = true)
 @Query("DELETE FROM Bill  where billId =:billId")
 public int deleteByBillId(@Param ("billId") long billId);
-@Query("SELECT b FROM Bill b WHERE b.billId LIKE CONCAT('%',:billId,'%')")
+@Query("SELECT b FROM Bill b WHERE b.billId LIKE  %?1%")
 List<Bill> findBillByBillIdLike(@Param("billId") long billId);
 }
