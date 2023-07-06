@@ -22,6 +22,6 @@ public int deleteByBillId(@Param ("billId") long billId);
 List<Bill> findBillByBillIdLike(@Param("billId") long billId);
 @Query("SELECT b FROM Bill b WHERE b.user.email =:email")
 public List<Bill> findByEmail(@Param("email") String email);
-//@Query("SELECT b FROM Bill b WHERE b.user.email =:email AND b.billId LIKE  %?1%")
-//public List<Bill> findUserBillLike(@Param("billId") long billId);
+@Query("SELECT b FROM Bill b WHERE b.user.email = ?1 AND b.billId LIKE  %?2%")
+public List<Bill> findUserBillLike(String email,long billId);
 }
