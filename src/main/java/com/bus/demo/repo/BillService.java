@@ -266,7 +266,7 @@ public class BillService implements IBill {
 			getInfors.add(getInfor);
 			
 		}
-		return null;
+		return getInfors;
 	}
 
 }
