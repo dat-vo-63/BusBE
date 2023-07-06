@@ -1,11 +1,27 @@
 package com.bus.demo.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 import lombok.Data;
 
 @Data
-public class GetInfor {
+public class GetInfor implements Comparable<GetInfor>{
+@Override
+	public int hashCode() {
+		return Objects.hash(billId);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GetInfor other = (GetInfor) obj;
+		return billId == other.billId;
+	}
 private long billId;
 private String startDate;
 private String startTime;
@@ -82,5 +98,10 @@ public int getPrice() {
 }
 public void setPrice(int price) {
 	this.price = price;
+}
+@Override
+public int compareTo(GetInfor o) {
+	// TODO Auto-generated method stub
+	return (int) (this.billId - o.billId);
 }
 }

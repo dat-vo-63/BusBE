@@ -85,7 +85,7 @@ public class BillService implements IBill {
 		String check = null;
 		
 		try {
-			for (int i = 10; i >= 0; i--) {
+			for (int i = 120; i >= 0; i--) {
 				thread.sleep(1000);
 				System.out.println(i);
 				if (i == 0) {
