@@ -71,4 +71,8 @@ public class BillController {
 	{
 		return iBill.getDetailBillId(billId);
 	}
+	@GetMapping("/get-bill/{billId}")
+	public List<GetInfor> findBill(@PathVariable("billId") long billId){
+		return iBill.findByBillIdlike(billId);
+	}
 }

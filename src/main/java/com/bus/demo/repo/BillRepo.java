@@ -1,5 +1,7 @@
 package com.bus.demo.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +18,6 @@ public Bill findByBillId(long billId);
 @Modifying(clearAutomatically = true)
 @Query("DELETE FROM Bill  where billId =:billId")
 public int deleteByBillId(@Param ("billId") long billId);
+@Query("SELECT b FROM Bill b WHERE b.billId LIKE CONCAT('%',:billId,'%')")
+List<Bill> findBillByBillIdLike(@Param("billId") long billId);
 }

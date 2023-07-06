@@ -13,5 +13,6 @@ public interface IBill {
 	public String delete(long billId) ;
 	public List<GetInfor> getDetailBill();
 	public GetInfor getDetailBillId(long billId);
+	public List<GetInfor> findByBillIdlike(long billId);
 	
 	}
