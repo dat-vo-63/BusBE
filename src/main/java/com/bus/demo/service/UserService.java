@@ -3,16 +3,20 @@ package com.bus.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//import com.bus.demo.dto.util.EmailUtil;
+//import com.bus.demo.dto.util.OtpUtil;
 import com.bus.demo.entity.User;
 import com.bus.demo.repo.IUser;
 import com.bus.demo.repo.UserRepo;
-
-import jakarta.persistence.Entity;
 
 @Service
 public class UserService  implements IUser{
 @Autowired
 UserRepo repo;
+//@Autowired
+// OtpUtil otpUtil;
+//@Autowired
+// EmailUtil emailUtil;
 	@Override
 	public User findByPhoneNumber(String phoneNumber) {
 		
