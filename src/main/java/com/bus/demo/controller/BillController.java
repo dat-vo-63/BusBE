@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +67,10 @@ public class BillController {
 	@GetMapping("/find-Bill")
 	public List<GetInfor> findInfo() {
 		return iBill.getDetailBill();
+	}
+	@GetMapping("/find-Bill-paging")
+	public PagedListHolder<GetInfor> findInfo(@RequestBody Map<String, String>map) {
+		return iBill.getDetailBill(Integer.parseInt(map.get("offset")),Integer.parseInt(map.get("pageSize")));
 	}
 	@GetMapping("/get-detail-bill/{billId}")
 	public GetInfor findDetailBybillId(@PathVariable("billId") long billId)

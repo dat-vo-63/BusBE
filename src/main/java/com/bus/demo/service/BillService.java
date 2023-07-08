@@ -1,10 +1,15 @@
 package com.bus.demo.service;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.bus.demo.entity.Bill;
@@ -394,6 +399,19 @@ public class BillService implements IBill {
 			infors = getDetailBill();
 		}
 		return infors;
+	}
+
+	@Override
+	public PagedListHolder<GetInfor> getDetailBill(int offset, int pagesize) {
+		List<GetInfor> getInfors= getDetailBill();
+		PagedListHolder<GetInfor> page = new PagedListHolder(getInfors);
+		page.setPageSize(pagesize); // number of items per page
+		page.setPage(offset);      // set to first page
+
+		// Retrieval
+		page.getPageCount(); // number of pages 
+		page.getPageList();  // a L
+		return page;
 	}
 
 	

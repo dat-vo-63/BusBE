@@ -55,7 +55,7 @@ public User getUser() {
 public void setUser(User user) {
 	this.user = user;
 }
-@ManyToOne(targetEntity = User.class,cascade = CascadeType.ALL,fetch =  FetchType.EAGER)
+@ManyToOne(targetEntity = User.class,cascade = CascadeType.PERSIST,fetch =  FetchType.EAGER)
 @JoinColumn(name = "userId",referencedColumnName = "userId")
 private User user;
 
