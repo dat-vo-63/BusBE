@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bus.demo.dto.APIResponse;
 import com.bus.demo.entity.Bill;
 import com.bus.demo.entity.GetInfor;
 import com.bus.demo.repo.IBill;
@@ -69,8 +71,10 @@ public class BillController {
 		return iBill.getDetailBill();
 	}
 	@GetMapping("/find-Bill-paging")
-	public PagedListHolder<GetInfor> findInfo(@RequestBody Map<String, String>map) {
-		return iBill.getDetailBill(Integer.parseInt(map.get("offset")),Integer.parseInt(map.get("pageSize")));
+	public APIResponse<List<GetInfor>> findInfo(@RequestBody Map<String, String>map) {
+		List<GetInfor> getInfors= iBill.getDetailBill(Integer.parseInt(map.get("offset")),5);
+		int total = iBill.getDetailBill().size();
+		return new APIResponse<>((int)Math.round((double)total/5),getInfors);
 	}
 	@GetMapping("/get-detail-bill/{billId}")
 	public GetInfor findDetailBybillId(@PathVariable("billId") long billId)

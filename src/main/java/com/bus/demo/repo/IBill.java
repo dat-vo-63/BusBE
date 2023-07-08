@@ -21,6 +21,6 @@ public interface IBill {
 	public List<GetInfor> findUserBillIdLike(String email,String billId);
 	public List<GetInfor> findUserBillByEmailAndStartDate(String email,String startDate);
 	public List<GetInfor> findAllBillByStartDate(String startDate);
-	public PagedListHolder<GetInfor> getDetailBill(int offset,int pagesize);
+	public List<GetInfor> getDetailBill(int offset,int pagesize);
 	
 	}

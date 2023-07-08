@@ -402,16 +402,21 @@ public class BillService implements IBill {
 	}
 
 	@Override
-	public PagedListHolder<GetInfor> getDetailBill(int offset, int pagesize) {
-		List<GetInfor> getInfors= getDetailBill();
-		PagedListHolder<GetInfor> page = new PagedListHolder(getInfors);
-		page.setPageSize(pagesize); // number of items per page
-		page.setPage(offset);      // set to first page
-
+	public List<GetInfor> getDetailBill(int offset, int pagesize) {
+		List<GetInfor> getInfors= new ArrayList<>();
+//		PagedListHolder<GetInfor> page = new PagedListHolder<GetInfor>(getInfors);
+//		page.setPageSize(pagesize); // number of items per page
+//		page.setPage(offset);      // set to first pa
+		 Page<Bill> bills = billRepo.findAll(PageRequest.of(offset, pagesize));
+		 for(int i=0;i<= bills.getContent().size()-1;i++)
+		 {
+			GetInfor getInfor = getDetailBillId(bills.getContent().get(i).getBillId());
+			getInfors.add(getInfor);
+		 }
+		 return getInfors;
 		// Retrieval
-		page.getPageCount(); // number of pages 
-		page.getPageList();  // a L
-		return page;
+//		page.getPageCount(); // number of pages 
+//		page.getPageList();  // a L
 	}
 
 	
