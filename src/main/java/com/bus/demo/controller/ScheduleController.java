@@ -21,8 +21,8 @@ import com.bus.demo.repo.IBus;
 import com.bus.demo.repo.ISchedule;
 import com.bus.demo.repo.ISeat;
 import com.bus.demo.repo.IUser;
-import com.bus.demo.repo.ScheduleService;
-import com.bus.demo.repo.TicketService;
+import com.bus.demo.service.ScheduleService;
+import com.bus.demo.service.TicketService;
 @RestController
 @CrossOrigin(value = "*")
 public class ScheduleController {
@@ -100,7 +100,7 @@ public class ScheduleController {
 	{
 		return schedule.findScheduleWithPaginationWithSorting(offset, pagesize,field);
 	}
-	@DeleteMapping("/delete-schedule")
+	@PostMapping("/delete-schedule")
 	public String deleteSchedule(@RequestBody Map<String, Long> map) {
 		return schedule.deleteSchedule(map.get("scheduleId"));
 	}

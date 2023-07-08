@@ -1,4 +1,4 @@
-package com.bus.demo.repo;
+package com.bus.demo.service;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import com.bus.demo.entity.Bus;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
+import com.bus.demo.repo.BusRepo;
+import com.bus.demo.repo.IBus;
+import com.bus.demo.repo.ISchedule;
 @Service
 public class BusImp implements IBus {
 	@Autowired

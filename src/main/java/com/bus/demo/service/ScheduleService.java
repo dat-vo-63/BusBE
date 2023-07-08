@@ -1,4 +1,4 @@
-package com.bus.demo.repo;
+package com.bus.demo.service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +25,10 @@ import com.bus.demo.entity.Bus;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
 import com.bus.demo.entity.SortBySeatId;
+import com.bus.demo.repo.BusRepo;
+import com.bus.demo.repo.ISchedule;
+import com.bus.demo.repo.ScheduleRepo;
+import com.bus.demo.repo.SeatRepo;
 
 @Service
 public class ScheduleService implements ISchedule{
@@ -131,7 +135,7 @@ SeatRepo seatRepo;
 		for(int i=0;i<=schedual.getTotalSeat()-1;i++)
 		{
 			Seat seat = new Seat();
-			seat.setSeatNo(Integer.toString(i));
+			seat.setSeatNo(Integer.toString(i+1));
 			seat.setSchedual(schedual);
 			if(i >= 90)
 			{
@@ -409,13 +413,20 @@ SeatRepo seatRepo;
 			listSchedule= repo.findByStartDate(date);
 		for(int i=0;i<=listSchedule.size()-1;i++)
 		{
-			String scheduleTime = listSchedule.get(i).getStartTime();
-			scheduleTime = scheduleTime.replace(':', '.');
-			double scheduleTimeConvert = Double.parseDouble(scheduleTime);
-			if(currentTime<scheduleTimeConvert)
+			if(dateTimeGetDate.isBefore(dateSchedule))
 			{
 				result.add(listSchedule.get(i));
 			}
+			else {
+				String scheduleTime = listSchedule.get(i).getStartTime();
+				scheduleTime = scheduleTime.replace(':', '.');
+				double scheduleTimeConvert = Double.parseDouble(scheduleTime);
+				if(currentTime<scheduleTimeConvert)
+				{
+					result.add(listSchedule.get(i));
+				}
+			}
+			
 		}
 		}
 		return result;
@@ -472,6 +483,7 @@ SeatRepo seatRepo;
 		if(schedual!= null)
 		{
 			String schedualstartDate = schedual.getStartDate();
+			schedualstartDate = schedualstartDate.replace('/', '-');
 			LocalDate date = LocalDate.parse(schedualstartDate);
 		    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		    String formattedDate = formatter.format(date);

@@ -1,9 +1,11 @@
-package com.bus.demo.repo;
+package com.bus.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bus.demo.entity.User;
+import com.bus.demo.repo.IUser;
+import com.bus.demo.repo.UserRepo;
 
 import jakarta.persistence.Entity;
 

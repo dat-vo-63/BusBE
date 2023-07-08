@@ -1,4 +1,4 @@
-package com.bus.demo.repo;
+package com.bus.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.bus.demo.entity.Schedual;
 import com.bus.demo.entity.Seat;
 import com.bus.demo.entity.Ticket;
+import com.bus.demo.repo.ITicket;
+import com.bus.demo.repo.SeatRepo;
+import com.bus.demo.repo.TicketRepo;
 
 @Service
 public class TicketService implements ITicket{

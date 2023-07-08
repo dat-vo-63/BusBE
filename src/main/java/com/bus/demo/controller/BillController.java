@@ -19,8 +19,8 @@ import com.bus.demo.repo.IBill;
 import com.bus.demo.repo.IBus;
 import com.bus.demo.repo.ISeat;
 import com.bus.demo.repo.IUser;
-import com.bus.demo.repo.ScheduleService;
-import com.bus.demo.repo.TicketService;
+import com.bus.demo.service.ScheduleService;
+import com.bus.demo.service.TicketService;
 @RestController
 @CrossOrigin(value = "*")
 public class BillController {
@@ -85,5 +85,15 @@ public class BillController {
 	public List<GetInfor> findUserBillbyEmailAndBillId(@RequestBody Map<String, String> map)
 	{
 		return iBill.findUserBillIdLike(map.get("email"), map.get("billId"));
+	}
+	@PutMapping("/find-all-bill-by-start-date")
+	public List<GetInfor> findAllBillByStartDate(@RequestBody Map<String, String> map)
+	{
+		return iBill.findAllBillByStartDate(map.get("startDate"));
+	}
+	@PutMapping("/find-user-bill-by-email-start-date")
+	public List<GetInfor> findAllBillByEmailAndStartDate(@RequestBody Map<String, String> map)
+	{
+		return iBill.findUserBillByEmailAndStartDate(map.get("email"),map.get("startDate"));
 	}
 }
