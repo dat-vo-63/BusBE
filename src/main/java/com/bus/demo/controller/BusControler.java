@@ -78,7 +78,7 @@ public class BusControler {
 		return busRepo.findAll();
 	}
 	//Update xe
-	@PutMapping("/updateBus/{id}")
+	@PutMapping("/updateBus")
 	public String updateBus(@RequestBody Bus bus) {
 		return busRepo.update(bus);
 	}
