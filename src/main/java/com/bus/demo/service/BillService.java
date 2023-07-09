@@ -149,7 +149,7 @@ public class BillService implements IBill {
 		billRepo.deleteById(billId);
 		return "Deleted";
 	}
-
+/////// Show all Bill.
 	@Override
 	public List<GetInfor> getDetailBill() {
 		List<Ticket> tickets = ticketRepo.findAll();
@@ -180,7 +180,7 @@ public class BillService implements IBill {
 		return getInfors;
 		
 	}
-
+// Show 1 bill by BillId
 	@Override
 	public GetInfor getDetailBillId(long billId) {
 //		Bill bill =billRepo.findByBillId(billId);

@@ -64,6 +64,7 @@ public class BillController {
 	public String payment(@PathVariable Long billId) {
 		return iBill.Pay(billId);
 	}
+	//Show all bills
 	@GetMapping("/find-Bill")
 	public List<GetInfor> findInfo() {
 		return iBill.getDetailBill();
@@ -74,11 +75,12 @@ public class BillController {
 		int total = iBill.getDetailBill().size();
 		return new APIResponse<>((int)Math.round((double)total/5),getInfors);
 	}
+	//Show 1 bill
 	@GetMapping("/get-detail-bill/{billId}")
 	public GetInfor findDetailBybillId(@PathVariable("billId") long billId)
 	{
 		return iBill.getDetailBillId(billId);
-	}
+	}//Show all bill with search
 	@PutMapping("/get-bill")
 	public List<GetInfor> findBill(@RequestBody Map<String, String> map){
 		return iBill.findByBillIdlike((map.get("billId")));
