@@ -86,11 +86,11 @@ public class BusImp implements IBus {
 	}
 
 	@Override
-	public String update(Bus bus,long busId) {
-		String check = checkUpdateBus(busId);
+	public String update(Bus bus) {
+		String check = checkUpdateBus(bus.getBusId());
 		if(check.equalsIgnoreCase("You can Update"))
 		{
-		 Bus bu= busRepo.findById(busId);
+		 Bus bu= busRepo.findById(bus.getBusId());
 		 if(bu!=null) {
 			 bu.setName(bus.getName());
 			 bu.setSeat(bus.getSeat());
@@ -104,6 +104,21 @@ public class BusImp implements IBus {
 		else {
 			return "Can't Update";
 		}
+	}
+
+	@Override
+	public String deletedBus(long busId) {
+		Bus bus = busRepo.findById(busId);
+		List<Schedual> list =(iSchedule.findbyBusId(busId));
+		if(list.isEmpty())
+		{
+			busRepo.delete(bus);
+			return "Deleted Success";
+		}
+		else {
+			return "Can't Deleted";
+		}
+		
 	}
 
 //	@Override

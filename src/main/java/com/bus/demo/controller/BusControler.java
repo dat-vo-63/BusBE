@@ -77,9 +77,10 @@ public class BusControler {
 	public List<Bus> findAllBus(){
 		return busRepo.findAll();
 	}
-	@PostMapping("/updateBus/{id}")
-	public String updateBus(@RequestBody Bus bus,@PathVariable("id") long id) {
-		return busRepo.update(bus, id);
+	//Update xe
+	@PutMapping("/updateBus/{id}")
+	public String updateBus(@RequestBody Bus bus) {
+		return busRepo.update(bus);
 	}
 	@GetMapping("/findBus")
 	public Set<Bus> findBusToCurrentDate()
@@ -91,6 +92,11 @@ public class BusControler {
 	public Optional<Bus> findAllSeat(@PathVariable long id)
 	{
 	return Optional.of(busRepo.findById(id));
+	}
+	@PostMapping("/delete-bus")
+	public String deleteBus(@RequestBody Map<String, Long> map)
+	{
+		return busRepo.deletedBus((map.get("busId")));
 	}
 	
 	
