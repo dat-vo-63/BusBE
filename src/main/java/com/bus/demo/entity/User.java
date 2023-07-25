@@ -24,20 +24,9 @@ private String phoneNumber;
 private  String address;
 private String isActive;
 private int userBalance;
-private String otp;
-private LocalDateTime otpGeneratedTime;
-public String getOtp() {
-	return otp;
-}
-public void setOtp(String otp) {
-	this.otp = otp;
-}
-public LocalDateTime getOtpGeneratedTime() {
-	return otpGeneratedTime;
-}
-public void setOtpGeneratedTime(LocalDateTime otpGeneratedTime) {
-	this.otpGeneratedTime = otpGeneratedTime;
-}
+
+
+
 public int getUserBalance() {
 	return userBalance;
 }
