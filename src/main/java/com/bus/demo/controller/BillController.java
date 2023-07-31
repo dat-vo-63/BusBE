@@ -69,12 +69,12 @@ public class BillController {
 	public List<GetInfor> findInfo() {
 		return iBill.getDetailBill();
 	}
-	@GetMapping("/find-Bill-paging")
-	public APIResponse<List<GetInfor>> findInfo(@RequestBody Map<String, String>map) {
-		List<GetInfor> getInfors= iBill.getDetailBill(Integer.parseInt(map.get("offset")),5);
-		int total = iBill.getDetailBill().size();
-		return new APIResponse<>((int)Math.round((double)total/5),getInfors);
-	}
+//	@GetMapping("/find-Bill-paging")
+//	public APIResponse<List<GetInfor>> findInfo(@RequestBody Map<String, String>map) {
+//		List<GetInfor> getInfors= iBill.getDetailBill(Integer.parseInt(map.get("offset")),5);
+//		int total = iBill.getDetailBill().size();
+//		return new APIResponse<>((int)Math.round((double)total/5),getInfors);
+//	}
 	//Show 1 bill
 	@GetMapping("/get-detail-bill/{billId}")
 	public GetInfor findDetailBybillId(@PathVariable("billId") long billId)
