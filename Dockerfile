@@ -17,10 +17,15 @@
 #RUN ./mvnw dependency:go-offline
 #COPY src ./src
 #CMD ["./mvnw","spring-boot:run"]
-FROM maven:3.8.5-openjdk-17 AS build
-COPY .mvn/ .mvn
+FROM maven:3.8.5-openjdk-17-slim AS build
+COPY . .
+RUN     mvn clean verify
 
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/spring-boot.jar springboot.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","springboot.jar"]
+COPY --from=build /target/spring-docker.jar spring-docker.jar
+EXPOSE 9090
+ENTRYPOINT ["java","-jar","spring-docker.jar"]
+#FROM openjdk:12
+#ADD target/*.jar  spring-boot-docker.jar
+#EXPOSE 8080
+#ENTRYPOINT ["java", "-jar", "spring-boot-docker.jar"]

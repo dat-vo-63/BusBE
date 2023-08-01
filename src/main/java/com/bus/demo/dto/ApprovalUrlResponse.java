@@ -1,4 +1,4 @@
-package com.bus.demo.entity;
+package com.bus.demo.dto;
 
 public class ApprovalUrlResponse {
     private String href;

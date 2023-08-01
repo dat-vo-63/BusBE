@@ -5,7 +5,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.bus.demo.entity.ApprovalUrlResponse;
+import com.bus.demo.dto.ApprovalUrlResponse;
 import com.bus.demo.entity.Order;
 
 @Service

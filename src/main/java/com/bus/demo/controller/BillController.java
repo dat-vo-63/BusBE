@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bus.demo.dto.APIResponse;
 import com.bus.demo.entity.Bill;
 import com.bus.demo.entity.GetInfor;
 import com.bus.demo.repo.IBill;
